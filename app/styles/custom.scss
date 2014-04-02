@@ -1,0 +1,8 @@
+/* angular-ui-bootstrap fix */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; };
+
+/* custom reusable classes */
+.spacer-y {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
