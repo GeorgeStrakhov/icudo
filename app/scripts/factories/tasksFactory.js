@@ -5,7 +5,8 @@
  */
 
 angular.module('iuido')
-.factory ('TasksFactory', ['$firebase', '$rootScope', 'dataConfig', function($firebase, $rootScope, dataConfig) {
-    var ref = new Firebase(dataConfig.firebaseBaseUrl+'/tasks');
+.factory ('TasksFactory', ['$firebase', '$rootScope', 'dataConfig', 'UserService', '$log', function($firebase, $rootScope, dataConfig, UserService, $log) {
+    var user = UserService.user;
+    var ref = new Firebase(dataConfig.firebaseBaseUrl+'/users/'+user.$id+'/tasks');
     return $firebase(ref);
 }]);

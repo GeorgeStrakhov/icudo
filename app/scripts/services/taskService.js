@@ -16,8 +16,7 @@ angular.module('iuido')
         important: false,
         urgent: false,
         interesting: false,
-        status: "active",
-        userId: this.user.$id
+        status: "active"
     };
     var self = this;
 

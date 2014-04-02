@@ -16,10 +16,13 @@ IUIDO is a todo list.
 5. When you log in tomorrow (first login each day) you are prompted to clean up your list: mark the dones, and for each undone you either need to move it to today or forget about it
 
 ##Todo
+* fix signup with new permission rules (datasnapshot rules?)
+* simplify UsersFactory? to remove the warning...
 * permission rules:
-    default: read & write false
-    read & write my user object if my auth.uid == user.uid
-    read & write tasks where my auth.uid == task.userId
     validation: tasks should have name etc.
-* create functions in tasksservice
+* create functions in tasksservice + controller + view
+    - markDone
+    - markForget
+    - edit tas1
+* prioritization function / filter (at least one I U and I, then oldest first)
 * show special screen for the first login a day (after 4am) => logic inside UserService
