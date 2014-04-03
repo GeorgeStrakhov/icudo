@@ -6,11 +6,20 @@
  */
 
 angular.module('iuido')
-.service('UserService', ['$q', '$log', 'AuthFactory', 'UsersFactory', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, AuthFactory, UsersFactory, dataConfig, $rootScope, $location, toastr) {
+.service('UserService', ['$q', '$log', 'AuthFactory', 'ProfileCreatorFactory', 'UsersFactory', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, AuthFactory, ProfileCreatorFactory, UsersFactory, dataConfig, $rootScope, $location, toastr) {
 
         var Auth = AuthFactory;
         var Users = UsersFactory;
         var self = this;
+
+        //test another approach
+        $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+            $log.log(user);
+        });
+
+        $rootScope.$on("$firebaseSimpleLogin:logout", function(e) {
+            $log.log('logout!');
+        });
         
         //set the user in this singleton if it's not set
         getUserViaId().then(function(u){
@@ -58,21 +67,33 @@ angular.module('iuido')
         };
         
         this.recoverPassword = function(email) {
-            Auth.$sendPasswordResetEmail(userEmail);
+            Auth.$sendPasswordResetEmail(email);
             $location.path('/');
             toastr.success('Please check your email, we sent instructions your way!');
         };
 
         this.signup = function(newUser) {
+            //this is an ugly callback hell nightmare. ToDo: refactor
             Auth.$createUser(newUser.email, 'tempPass2014', true).then(function(newUserObj) {
-                //we are hacking for better userflow, setting temp password and instantly sending a reovery email with a token and a link for the user to set a real password
-                //create a record for the new user
-                Users[newUserObj.uid] = newUser;
-                Users.$save(newUserObj.uid).then(function(ref) {
-                    //then send password reset email with a token
-                    Auth.$sendPasswordResetEmail(newUser.email).then(function(){
-                        $location.path('/');
-                        toastr.success('Thank you! We\'ve sent an email with further instructions your way.');
+                //login he newly created user first
+                Auth.$login('password', {
+                    email: newUser.email,
+                    password: 'tempPass2014'
+                })
+                .then(function(user){
+                    //we are hacking for better userflow, setting temp password and instantly sending a reovery email with a token and a link for the user to set a real password
+                    //create a record for the new user
+                    ProfileCreatorFactory.createProfile(newUserObj.uid, newUser).then(function(userObj) {
+                        //then send password reset email with a token
+                        Auth.$sendPasswordResetEmail(newUser.email).then(function(){
+                            Auth.$logout();
+                            self.user = false;
+                            $location.path('/');
+                            toastr.success('Thank you! We\'ve sent an email with further instructions your way.');
+                        }, function(err){
+                            $log.log(err);
+                            toastr.error('Sorry, there was an error.');
+                        });
                     });
                 });
             },

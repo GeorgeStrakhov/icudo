@@ -6,6 +6,7 @@ angular.module('iuido')
     //initial data
     $scope.tasks = TaskService.tasks;
     $scope.isLoaded = false;
+
     //get current user
     $scope.user = UserService.user;
 
@@ -17,6 +18,7 @@ angular.module('iuido')
     //add task
     $scope.addTask = function() {
         TaskService.addNewTask($scope.newTask);
+        $scope.newTask = {};
     };
 
 }]);

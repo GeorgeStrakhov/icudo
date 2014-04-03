@@ -39,8 +39,7 @@ angular.module('iuido')
             $scope.auth.$changePassword($scope.auth.user.email, $scope.oldPassword, $scope.newPassword).then(function(i) {
                 toastr.success('New password set!');
                 $scope.oldUserPassword = false;
-                $location.path('/ideas');
-                $location.url($location.path);
+                UserService.tryLogin($scope.auth.user.email, $scope.newPassword);
             },function(error){
                 toastr.error('Oops, something doesn\'t look right. Check your old password and try again.');
             });
