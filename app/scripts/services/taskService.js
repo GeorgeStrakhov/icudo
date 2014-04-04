@@ -35,7 +35,7 @@ angular.module('iuido')
     
     //mark task done
     this.markTaskDone = function(id) {
-        this.tasks.$child(id).$update({status: "done"});
+        this.tasks.$child(id).$update({status: "done"}).then(function(s){$log.log('Marked done task: '+id);},function(e){$log.log(e);});
     };
 
     /* helper functions */
