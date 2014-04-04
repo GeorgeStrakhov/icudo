@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('iuido')
-    .controller('ChangePasswordController', ['$scope', '$rootScope', 'AuthFactory', 'UsersFactory', 'UserService', '$log', '$location', '$route', '$routeParams', 'dataConfig', 'toastr', function($scope, $rootScope, Auth, Users, UserService, $log, $location, $route, $routeParams, dataConfig, toastr) {
+    .controller('ChangePasswordController', ['$scope', '$rootScope', 'AuthFactory', 'UserService', '$log', '$location', '$route', '$routeParams', 'dataConfig', 'toastr', function($scope, $rootScope, Auth, UserService, $log, $location, $route, $routeParams, dataConfig, toastr) {
         
         //initialization
         $scope.auth = Auth;
-        $scope.users = Users;
 
         //process on initizalization: token based one time login
         $scope.auth.$getCurrentUser().then(function(user) {

@@ -1,6 +1,11 @@
 /* angular-ui-bootstrap fix */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; };
 
+/* general helpers */
+.crossed {
+    text-decoration: line-through;
+}
+
 /* custom reusable classes */
 .spacer-y {
     margin-top: 10px;

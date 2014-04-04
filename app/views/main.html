@@ -1,10 +1,17 @@
 <div class="row">
     <div ng-include src="'/views/partials/loading.html'"></div>
-    <div ng-show="isLoaded">
+    <div ng-show="allLoaded">
         <h4>Your Focus for today:</h4>
         <ul>
             <li ng-repeat="(id, task) in tasks">
-            {{task.name}}
+                <span>
+                    <span class="taskName" ng-class="{crossed: task.status == 'done'}">
+                        {{task.name}}
+                    </span>
+                    <span class="taskActions" ng-show="task.status == 'active'">
+                        - <a href ng-click="markDone(id)" >mark done</a>
+                    </span>
+                </span>
             </li>
         </ul>
         <hr />

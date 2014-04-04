@@ -5,20 +5,20 @@ angular.module('iuido')
 
     //initial data
     $scope.tasks = TaskService.tasks;
-    $scope.isLoaded = false;
 
     //get current user
     $scope.user = UserService.user;
 
-    //loaded
-    $scope.tasks.$on('loaded', function() {
-        $scope.isLoaded = true;
-    });
-
     //add task
     $scope.addTask = function() {
         TaskService.addNewTask($scope.newTask);
+        //clean up the input
         $scope.newTask = {};
+    };
+
+    //mar done
+    $scope.markDone = function(id) {
+        TaskService.markTaskDone(id);
     };
 
 }]);

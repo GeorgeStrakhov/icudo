@@ -6,33 +6,33 @@
  */
 
 angular.module('iuido')
-.service('UserService', ['$q', '$log', 'AuthFactory', 'ProfileCreatorFactory', 'UsersFactory', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, AuthFactory, ProfileCreatorFactory, UsersFactory, dataConfig, $rootScope, $location, toastr) {
+.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, dataConfig, $rootScope, $location, toastr) {
 
         var Auth = AuthFactory;
-        var Users = UsersFactory;
         var self = this;
 
-        //test another approach
+        //subscribe to events
         $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
-            $log.log(user);
+            $log.log('login!');
+            self.user = $firebase(new Firebase(dataConfig.firebaseBaseUrl+'/users/'+user.uid));
+            self.user.$on('loaded', function(){
+                //set allLoaded flag
+                $rootScope.allLoaded = true;
+                //check if it's the first login for today, then log the new login
+                $log.log(checkFirstLoginToday(self.user));
+                //log last login
+                logLastLoginTime(self.user); 
+            });
         });
 
         $rootScope.$on("$firebaseSimpleLogin:logout", function(e) {
             $log.log('logout!');
+            self.user = undefined;
         });
         
-        //set the user in this singleton if it's not set
-        getUserViaId().then(function(u){
-            self.user = (self.user) ? self.user : u;
-        });
-
         this.updateUserData = function(id, userObj) {
-           //this is a bit ugly; there has to be a better way. but works for now. ToDo: recreate!
-           var updatedUser = {};
-           updatedUser[id] = userObj;
-           UsersFactory.$update(updatedUser).then(function(){
+           self.user.$update(userObj).then(function(){
                //make sure the value in this singleton stays fresh
-               refreshUserObj();
                toastr.success('Settings updated!');
             }, function(error) {
                toaster.error(error);
@@ -44,8 +44,6 @@ angular.module('iuido')
                 email: email,
                 password: password
             }).then(function(user) {
-               //create userObj and make it available
-               refreshUserObj();
                //if there is a route to which we should redirect
                if($rootScope.goToNext) {
                    $location.path($rootScope.goToNext);
@@ -62,7 +60,6 @@ angular.module('iuido')
 
         this.logout = function() {
             Auth.$logout();
-            self.user = false;
             toastr.success('Farewell!');
         };
         
@@ -87,7 +84,6 @@ angular.module('iuido')
                         //then send password reset email with a token
                         Auth.$sendPasswordResetEmail(newUser.email).then(function(){
                             Auth.$logout();
-                            self.user = false;
                             $location.path('/');
                             toastr.success('Thank you! We\'ve sent an email with further instructions your way.');
                         }, function(err){
@@ -112,51 +108,7 @@ angular.module('iuido')
     }
 
     function checkFirstLoginToday(userObj) {
-        var lastLogin = moment(userObj.lastLoginTime);
-        $log.log(lastLogin);
+        return moment(userObj.lastLoginTime);
     }
 
-    function refreshUserObj() {
-        getUserViaId().then(function(u){
-            self.user = u;
-        });
-    }
-
-    function getUserViaId(uid) {
-        //create response promise
-        var userObjDeferred = $q.defer();
-        //uid may be passed as 'undefined', string value or a promise. we need to deal with all those cases
-
-        //wrap uid around with a promise, even if it's a value
-        var uidPromise = $q.when(uid);
-        //check if we have uid
-        if(!uid) {
-            var uidDefer = $q.defer();
-            AuthFactory.$getCurrentUser().then(function(user){
-                if(user && user.uid){
-                    uidDefer.resolve(user.uid); 
-                } else {
-                    uidDefer.resolve(false);
-                }
-            });
-            uidPromise = uidDefer.promise;
-        }
-        uidPromise.then(function(useruid){
-            //may be we don't have an uid or a user at all
-            if(!useruid) {
-                userObjDeferred.resolve(false);
-                return;
-            }
-            //ok, we have a valide uid
-            var userObj = UsersFactory.$child(useruid);
-            //check if this is the first login of the day and set appropriate flags
-            checkFirstLoginToday(userObj);
-            //log last login time
-            logLastLoginTime(userObj);
-            userObjDeferred.resolve(userObj);
-        });
-
-        //return the promise
-        return userObjDeferred.promise;
-    };
 }]);

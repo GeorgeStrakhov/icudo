@@ -16,10 +16,8 @@ IUIDO is a todo list.
 5. When you log in tomorrow (first login each day) you are prompted to clean up your list: mark the dones, and for each undone you either need to move it to today or forget about it
 
 ##Todo
-* weird behavior on login: can't add tasks (they are added, but view not refreshed) 
-* check signup - creating users with no email?
-* check password recovery - getting stuck in the middle?
-* simplify UsersFactory? to remove the warning...
+* global loading indicator
+* password recovery when new browser window! - entry points...
 * permission rules:
     validation: tasks should have name etc.
 * create functions in tasksservice + controller + view
