@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido')
+angular.module('icudo')
     .controller('ChangePasswordController', ['$scope', '$rootScope', 'AuthFactory', 'UserService', '$log', '$location', '$route', '$routeParams', 'dataConfig', 'toastr', function($scope, $rootScope, Auth, UserService, $log, $location, $route, $routeParams, dataConfig, toastr) {
         
         //initialization

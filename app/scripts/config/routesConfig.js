@@ -4,7 +4,7 @@
  * routes configuration
  */
 
-angular.module('iuido')
+angular.module('icudo')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido')
+angular.module('icudo')
   .factory('ProfileCreatorFactory', ['$firebase', '$q', '$log', 'dataConfig', function($firebase, $q, $log, dataConfig) { 
       var ProfileCreatorFactory = {};
       ProfileCreatorFactory.createProfile = function(uid, userObj) {

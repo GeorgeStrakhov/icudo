@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido')
+angular.module('icudo')
   .controller('LandingController', ["$scope", "$log", "$location", "AuthFactory", function ($scope, $log, $location, Auth) {
 
     //if user authed - redirect to /ideas

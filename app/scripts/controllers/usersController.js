@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido')
+angular.module('icudo')
     .controller('UsersController', ['$scope', 'UserService', '$log', function($scope, UserService, $log) {
 
         //initialization

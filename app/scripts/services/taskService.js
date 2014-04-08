@@ -5,7 +5,7 @@
  * singleton!
  */
 
-angular.module('iuido')
+angular.module('icudo')
 .service('TaskService', ['$q', '$log', 'dataConfig', '$rootScope', '$location', 'toastr', 'TasksFactory', 'UserService', function($q, $log, dataConfig, $rootScope, $location, toastr, TasksFactory, UserService) {
 
     /* initialization */
@@ -14,8 +14,8 @@ angular.module('iuido')
     this.defaultTaskObj = {
         name: "be happy",
         important: false,
+        cool: false,
         urgent: false,
-        interesting: false,
         status: "active"
     };
     var self = this;
@@ -38,9 +38,9 @@ angular.module('iuido')
         updateTask(id, {"status":"done"});
     };
 
-    //mark task skipped
-    this.markTaskSkipped = function(id) {
-        updateTask(id, {"status":"skipped"});
+    //mark task forgotten
+    this.markTaskForgotten = function(id) {
+        updateTask(id, {"status":"forgotten"});
     };
 
     /* helper functions */

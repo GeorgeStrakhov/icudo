@@ -4,7 +4,7 @@
  * config static values
  */
 
- angular.module('iuido')
+ angular.module('icudo')
     .constant('dataConfig', {
         firebaseBaseUrl: 'https://iuido.firebaseio.com'
     });

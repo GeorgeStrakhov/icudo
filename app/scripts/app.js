@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido', [
+angular.module('icudo', [
   'ngCookies',
   'ngResource',
   'ngSanitize',

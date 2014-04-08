@@ -1,9 +1,9 @@
 'use strict';
 
 /* 
- * Matterness filter: filters a collection of tasks by iuido metterness:
- * 1) general matterness = isImportant + isUrgent + isInteresting
- * 2) every day you have to do at least one interesting, one important and one urgent (if they are present)
+ * Matterness filter: filters a collection of tasks by icudo metterness:
+ * 1) general matterness = isImportant + isUrgent + isCool
+ * 2) every day you have to do at least one cool, one important and one urgent (if they are present)
  *
  * How it works:
  * 1) assign general matterness
@@ -12,10 +12,10 @@
  * 4) try to find the highest ranking one and up its matterness so that it finds its way to the top 3
  */
 
-angular.module('iuido').filter('matternessFilter', ['$log', function($log) {
+angular.module('icudo').filter('matternessFilter', ['$log', function($log) {
     var count = 0;
     var tasks;
-    var taskParams = ['important', 'urgent', 'interesting'];
+    var taskParams = ['important', 'cool', 'urgent'];
     return function(input) {
         //is the collection empty? return
         if(input.$getIndex().length < 1) return input;

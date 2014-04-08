@@ -5,7 +5,7 @@
  * singleton!
  */
 
-angular.module('iuido')
+angular.module('icudo')
 .service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, dataConfig, $rootScope, $location, toastr) {
 
         var Auth = AuthFactory;

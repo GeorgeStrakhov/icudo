@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido')
+angular.module('icudo')
 .controller('TasksController', ['$scope', 'TaskService', 'UserService', '$filter', '$log',  function($scope, TaskService, UserService, $filter, $log) {
 
     //initial data
@@ -27,9 +27,9 @@ angular.module('iuido')
         TaskService.markTaskDone(id);
     };
 
-    //mark skipped
-    $scope.markSkipped = function(id) {
-        TaskService.markTaskSkipped(id);
+    //mark forgotten
+    $scope.markForgotten = function(id) {
+        TaskService.markTaskForgotten(id);
     };
 
     //update task name

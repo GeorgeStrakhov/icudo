@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('iuido')
+angular.module('icudo')
   .controller('MainController', ["$scope", "$log", 'AuthFactory', function ($scope, $log, Auth) {
     
     //Auth

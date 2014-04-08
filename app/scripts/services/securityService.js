@@ -4,7 +4,7 @@
  * security service: checking auth rights for routes and listening to rejections
  */
 
-angular.module('iuido')
+angular.module('icudo')
   .factory('SecurityService', ['$q', '$log', 'AuthFactory', function($q, $log, Auth) {
       var Security = {
           check: function() {
