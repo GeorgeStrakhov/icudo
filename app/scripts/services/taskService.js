@@ -35,9 +35,19 @@ angular.module('iuido')
     
     //mark task done
     this.markTaskDone = function(id) {
-        this.tasks.$child(id).$update({status: "done"}).then(function(s){$log.log('Marked done task: '+id);},function(e){$log.log(e);});
+        updateTask(id, {"status":"done"});
+    };
+
+    //mark task skipped
+    this.markTaskSkipped = function(id) {
+        updateTask(id, {"status":"skipped"});
     };
 
     /* helper functions */
+
+    function updateTask(id, updateDataObj) {
+        updateDataObj.updatedAt = new Date().getTime();
+        self.tasks.$child(id).$update(updateDataObj).then(function(s){$log.log('task updated: '+id);},function(e){$log.log(e);});
+    }
 
 }]);

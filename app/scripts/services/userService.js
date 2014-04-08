@@ -50,7 +50,7 @@ angular.module('iuido')
                    $rootScope.goToNext = false;
                } else {
                    //default route to go to 
-                   $location.path('/tasks');
+                   $location.path('/todo');
                }
                toastr.success('Welcome back!');
             }, function(error) {

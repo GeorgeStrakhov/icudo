@@ -19,8 +19,26 @@ angular.module('iuido')
           templateUrl: '/views/signup.html',
           controller: 'UsersController'
       })
-      .when('/tasks', {
-        templateUrl: '/views/main.html',
+      .when('/todo', {
+        templateUrl: '/views/todo.html',
+        controller: 'TasksController',
+        resolve: {
+            'auth': function(SecurityService) {
+                return SecurityService.check();
+            }
+        }
+      })
+      .when('/havedone', {
+        templateUrl: '/views/havedone.html',
+        controller: 'TasksController',
+        resolve: {
+            'auth': function(SecurityService) {
+                return SecurityService.check();
+            }
+        }
+      })
+      .when('/forgotten', {
+        templateUrl: '/views/forgotten.html',
         controller: 'TasksController',
         resolve: {
             'auth': function(SecurityService) {

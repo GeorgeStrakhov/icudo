@@ -7,7 +7,7 @@ angular.module('iuido')
     $scope.auth = Auth;
     $scope.auth.$getCurrentUser().then(function(){
             if(Auth.user) {
-                $location.path('/tasks');
+                $location.path('/todo');
             }
         });
 
