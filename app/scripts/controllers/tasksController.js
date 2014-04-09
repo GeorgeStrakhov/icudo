@@ -8,6 +8,7 @@ angular.module('icudo')
     $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
     //we are doing this here and not in the view to eliminate unnecessary reevaluations
     $scope.tasks.$on('loaded', function(e) {
+      $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
       $scope.tasks.$on('change', function(e){
         $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
       });
