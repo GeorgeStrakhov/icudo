@@ -1,17 +1,15 @@
 'use strict';
 
 angular.module('icudo')
-.controller('TasksController', ['$scope', 'TaskService', 'UserService', '$filter', '$log',  function($scope, TaskService, UserService, $filter, $log) {
+.controller('TasksController', ['$scope', 'TaskService', 'UserService', '$log',  function($scope, TaskService, UserService, $log) {
 
-    //initial data
-    $scope.tasks = TaskService.tasks;
-    $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
-    //we are doing this here and not in the view to eliminate unnecessary reevaluations
-    $scope.tasks.$on('loaded', function(e) {
-      $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
-      $scope.tasks.$on('change', function(e){
-        $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
-      });
+    //initial data & binding on update the event is emitted from the taskService
+    $scope.$on('tasksUpdated', function(){
+      $scope.tasks = TaskService.allTasks;
+    });
+    //also listen to routeChange since this controller is shared among a few views
+    $scope.$on('$routeChangeSuccess', function(){
+      $scope.tasks = TaskService.allTasks;
     });
 
     //get current user
@@ -24,14 +22,9 @@ angular.module('icudo')
         $scope.newTask = {};
     };
 
-    //mark done
-    $scope.markDone = function(id) {
-        TaskService.markTaskDone(id);
-    };
-
-    //mark forgotten
-    $scope.markForgotten = function(id) {
-        TaskService.markTaskForgotten(id);
+    //changestatus
+    $scope.changeTaskStatus = function(id, status) {
+        TaskService.changeTaskStatus(id, status);
     };
 
     //update task name
