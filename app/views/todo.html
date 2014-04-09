@@ -14,10 +14,10 @@
         </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="(id, task) in activeTasks | orderBy:'matterness'">
+      <tr ng-repeat="task in activeTasks">
         <td>{{task.matterness}}</td>
         <td>
-          <span class="taskName" ng-class="{crossed: task.status == 'done', red: task.status == 'forgotten'}"> 
+          <span class="taskName" ng-class="{red: task.focus}"> 
             {{task.name}}
           </span>
         </td>
@@ -26,7 +26,7 @@
         <td>{{task.urgent}}</td>
         <td>
           <span class="taskActions" ng-show="task.status == 'active'">
-            <a href ng-click="markDone(id)" >v</a> | <a href ng-click="markForgotten(id)">x</a>
+            <a href ng-click="markDone(task.id)" >v</a> | <a href ng-click="markForgotten(task.id)">x</a>
           </span>
         </td>
       </tr>
@@ -44,7 +44,7 @@
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="newTask.interesting"> cool
+          <input type="checkbox" ng-model="newTask.cool"> cool
         </label>
       </div>
       <div class="checkbox">

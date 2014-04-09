@@ -7,9 +7,10 @@ angular.module('icudo')
     $scope.tasks = TaskService.tasks;
     $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
     //we are doing this here and not in the view to eliminate unnecessary reevaluations
-    $scope.tasks.$on('change', function(e){
+    $scope.tasks.$on('loaded', function(e) {
+      $scope.tasks.$on('change', function(e){
         $scope.activeTasks = $filter('matternessFilter')($scope.tasks, 'matterness');
-        $log.log($scope.activeTasks);
+      });
     });
 
     //get current user
@@ -35,6 +36,7 @@ angular.module('icudo')
     //update task name
     $scope.updateTaskName = function(id) {
         $log.log(id);
+        $log.error('not implemented yet!');
     };
 
 }]);
