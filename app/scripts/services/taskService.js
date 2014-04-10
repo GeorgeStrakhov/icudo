@@ -63,6 +63,7 @@ angular.module('icudo')
   var filteredTasks;
   function refreshData() {
     filteredTasks = $filter('tasksFilter')(self.tasks);
+    self.allTasks.focus = filteredTasks.focus;
     self.allTasks.active = filteredTasks.active;
     self.allTasks.done = filteredTasks.done;
     self.allTasks.forgotten = filteredTasks.forgotten;

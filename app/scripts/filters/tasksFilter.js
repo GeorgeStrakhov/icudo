@@ -23,7 +23,7 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
   var filteredTasks = {};
   var taskParams = ['important', 'cool', 'urgent'];
   var taskStatuses = ['active', 'done', 'forgotten'];
-  return function(input) {
+  var filterFunction = function(input) {
     //is the collection empty? return
     if(input.$getIndex().length < 1) return input;
 
@@ -33,6 +33,8 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
     _.each(taskStatuses, function(s) {
       filteredTasks[s] = [];
     });
+    //focus will be a separate array
+    filteredTasks.focus = [];
 
     //first assign normal matterness to each task
     _.each(input, function(task, key) {
@@ -57,18 +59,55 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
     
     //sort active tasks matterness
     filteredTasks.active = _.sortBy(filteredTasks.active, function(task) {
-      return task.matterness
+      return task.matterness;
     }).reverse();
     
-    //make sure there is at least one task of each type (urgent, cool, important) in the top 3 of active tasks
+    //pick the top three for focus based on a logic that there has to be at least 1 of each (important, cool, urgent) 
+    _.each(taskParams, function(what) {
+      var singleParamTasks = _.filter(filteredTasks.active, function(task) {return task[what] == true});
+      var found = false;
+      _.each(singleParamTasks, function(t) {
+        if(!found && _.indexOf(filteredTasks.focus, t) < 0) {
+          filteredTasks.focus.push(t);
+          found = true;
+        }
+      });
+    });
 
-    //for active tasks add focus: true to the top 3 tasks so that we can highlight them
-    _.each(filteredTasks.active, function(task,i) {
-      filteredTasks.active[i].focus = (i < 3) ? true : false;
+    //make sure that there are at least 3 tasks to focus on, even if rules do not match
+    for (var z=0; z<3; z++) {
+      if(filteredTasks.focus.length < 3 && filteredTasks.active.length > 0) {
+        if(_.indexOf(filteredTasks.focus, filteredTasks.active[z]) < 0) {
+          filteredTasks.focus.push(filteredTasks.active[z]);
+        }
+      }
+    }
+
+    //now get rid of duplication: remove the tasks that are in the focus from the list of active tasks
+    filteredTasks.active = _.difference(filteredTasks.active, filteredTasks.focus);
+
+    //finally sort focus by matterness
+    filteredTasks.focus = _.sortBy(filteredTasks.focus, function(task) {
+      return task.matterness;
+    }).reverse();
+
+    /* done tasks extra logic */
+
+    //sort by last updated (newer first)
+    filteredTasks.done = _.sortBy(filteredTasks.done, function(task) {
+      return task.updatedAt;
+    }).reverse();
+    
+    //add a formatted updated date to done tasks
+    _.each(filteredTasks.done, function(task) {
+      task.dateUpdated = moment(task.updatedAt).format("YYYY.MM.DD");
     });
 
     count++;
     $log.log('matterness filter used '+count+' times by now');
     return filteredTasks; 
   };
+
+  return filterFunction;
+
 }]);
