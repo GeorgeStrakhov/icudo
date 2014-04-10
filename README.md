@@ -16,13 +16,10 @@ ICUDO is a todo list.
 5. When you log in tomorrow (first login each day) you are prompted to clean up your list: mark the dones, and for each undone you either need to move it to today or forget about it
 
 ##Todo
-* prioritization function / filter (at least one I C and U, then oldest first)
-* filter the dones and forgotten (sort by updated? or created?, dones show by date?)
+* edit task // doubleclick? button?
 * global loading indicator
-* UI
-* css buttons / divs / links circular with different fillings (red green blue or transparent)
+* UI (todo, have done, forgotten)
+* mobile friendly (foldable menu (or sidemenu?) etc.)
 * password recovery when new browser window! - entry points...
-* create functions in tasksservice + controller + view
-    - edit task // doubleclick? button?
 * show special screen for the first login a day (after 4am) => logic inside UserService
 * performance test: what if there are 6000 tasks in the your account?

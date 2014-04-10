@@ -1,0 +1,13 @@
+<td class="indicator-cell"><span class="task-indicator" ng-class="{important: task.important}" ng-click="toggleTaskAttribute(task.id, 'important')"></span></td>
+<td class="indicator-cell"><span class="task-indicator" ng-class="{cool: task.cool}" ng-click="toggleTaskAttribute(task.id, 'cool')"></span></td>
+<td class="indicator-cell"><span class="task-indicator" ng-class="{urgent: task.urgent}" ng-click="toggleTaskAttribute(task.id, 'urgent')"></span></td>
+<td>
+  <span class="taskName"> 
+    {{task.name}}
+  </span>
+</td>
+<td>
+  <span class="taskActions" ng-show="task.status == 'active'">
+    <a href ng-click="changeTaskStatus(task.id, 'done')" >v</a> | <a href ng-click="changeTaskStatus(task.id, 'forgotten')">x</a>
+  </span>
+</td>

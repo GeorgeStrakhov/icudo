@@ -52,11 +52,18 @@ angular.module('icudo')
     updateTask(id, {"status" : newStatus});
   };
 
+  //toggle task attribute
+  this.toggleTaskAttribute = function(id, attr) {
+    var task = self.tasks.$child(id);
+    task[attr] = !task[attr];
+    task.$save().then(function(s){$log.log('task updated: '+id);}, function(e){$log.error(e);});
+  };
+
   /* helper functions */
 
   function updateTask(id, updateDataObj) {
     updateDataObj.updatedAt = new Date().getTime();
-    self.tasks.$child(id).$update(updateDataObj).then(function(s){$log.log('task updated: '+id);},function(e){$log.log(e);});
+    self.tasks.$child(id).$update(updateDataObj).then(function(s){$log.log('task updated: '+id);},function(e){$log.error(e);});
   }
 
   // reapply filters and reassign data

@@ -1,20 +1,15 @@
 'use strict';
 
 /* 
- * Matterness filter: filters a collection of tasks by icudo metterness and returns an object, containing 3 things:
-1) array of active tasks
-2) array of done tasks
-3) array of forgotten tasks
+ * Matterness filter: filters a collection of tasks by icudo metterness and returns an object, containing 4 arrays:
+ * 1) array of focus tasks
+ * 2) array of active tasks
+ * 3) array of done tasks
+ * 4) array of forgotten tasks
 
-Filtering by metterness logic:
+ * Focus logic:
  * 1) general matterness = isImportant + isUrgent + isCool
  * 2) every day you have to do at least one cool, one important and one urgent (if they are present)
- *
- * How it works:
- * 1) assign general matterness
- * 2) check if there are one of each in the top 3
- * 3) if not => for each one that is not there:
- * 4) try to find the highest ranking one and up its matterness so that it finds its way to the top 3
  */
 
 angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
@@ -67,9 +62,11 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
       var singleParamTasks = _.filter(filteredTasks.active, function(task) {return task[what] == true});
       var found = false;
       _.each(singleParamTasks, function(t) {
-        if(!found && _.indexOf(filteredTasks.focus, t) < 0) {
-          filteredTasks.focus.push(t);
+        if(!found) {
           found = true;
+          if(_.indexOf(filteredTasks.focus, t) < 0) {
+            filteredTasks.focus.push(t);
+          }
         }
       });
     });

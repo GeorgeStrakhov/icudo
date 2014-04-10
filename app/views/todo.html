@@ -2,50 +2,10 @@
   <div ng-include src="'/views/partials/loading.html'"></div>
   <div ng-show="allLoaded">
     <h4>Your Focus for today:</h4>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>matterness</th>
-          <th>what</th>
-          <th>i</th>
-          <th>c</th>
-          <th>u</th>
-          <th>(v|x)</th>
-        </tr>
-      </thead>
+    <table class="table table-hover tasks-table">
       <tbody>
-      <tr ng-repeat="task in tasks.focus">
-        <td>{{task.matterness}}</td>
-        <td>
-          <span class="taskName red"> 
-            {{task.name}}
-          </span>
-        </td>
-        <td>{{task.important}}</td>
-        <td>{{task.cool}}</td>
-        <td>{{task.urgent}}</td>
-        <td>
-          <span class="taskActions" ng-show="task.status == 'active'">
-            <a href ng-click="changeTaskStatus(task.id, 'done')" >v</a> | <a href ng-click="changeTaskStatus(task.id, 'forgotten')">x</a>
-          </span>
-        </td>
-      </tr>
-      <tr ng-repeat="task in tasks.active">
-        <td>{{task.matterness}}</td>
-        <td>
-          <span class="taskName"> 
-            {{task.name}}
-          </span>
-        </td>
-        <td>{{task.important}}</td>
-        <td>{{task.cool}}</td>
-        <td>{{task.urgent}}</td>
-        <td>
-          <span class="taskActions" ng-show="task.status == 'active'">
-            <a href ng-click="changeTaskStatus(task.id, 'done')" >v</a> | <a href ng-click="changeTaskStatus(task.id, 'forgotten')">x</a>
-          </span>
-        </td>
-      </tr>
+        <tr class="focusTasksRow" ng-repeat="task in tasks.focus" ng-include="'/views/partials/singleActiveTaskRowInside.html'"></tr>
+        <tr ng-repeat="task in tasks.active" ng-include="'/views/partials/singleActiveTaskRowInside.html'"></tr>
       </tbody>
     </table>
     <hr />

@@ -1,17 +1,60 @@
 /* angular-ui-bootstrap fix */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; };
 
+/* displaying tasks table */
+
+.tasks-table {
+  tr {
+    td.indicator-cell {
+      width: $buttonSize*1.5;
+    }
+  }
+}
+
+.focusTasksRow {
+  td {
+    .taskName {
+      font-weight: bold;
+    }
+  }
+}
+
+.task-indicator {
+  display: inline-block;
+  height: $buttonSize;
+  min-height: $buttonSize;
+  width: $buttonSize;
+  min-width: $buttonSize;
+  border: 1px solid #000;
+  border-radius: $buttonSize;
+  &.important {
+    border: none;
+    background-color: rgb(0,0,255);
+  }
+  &.cool {
+    border: none;
+    background-color: rgb(0,255,0);
+  }
+  &.urgent {
+    border: none;
+    background-color: rgb(255,0,0);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 /* general helpers */
 .crossed {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .red {
-    color: red;
+  color: red;
 }
 
 /* custom reusable classes */
 .spacer-y {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

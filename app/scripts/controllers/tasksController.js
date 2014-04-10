@@ -22,6 +22,11 @@ angular.module('icudo')
         $scope.newTask = {};
     };
 
+    //toggle attribute important / cool / urgent
+    $scope.toggleTaskAttribute = function(id, attr) {
+      TaskService.toggleTaskAttribute(id, attr);
+    };
+
     //changestatus
     $scope.changeTaskStatus = function(id, status) {
         TaskService.changeTaskStatus(id, status);
