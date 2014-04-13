@@ -15,8 +15,11 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
     <!-- endbower -->
-    <!-- font-awesome -->
+
+    <!-- vendor -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="vendor/ng-mobile-menu/dist/ng-mobile-menu.min.css" />
+
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -29,12 +32,27 @@
 
     <!-- notifications -->
     <toaster-container> </toaster-container>
-    <!-- Header -->
-    <div ng-include src="'/views/partials/header.html'"></div>
-    <!-- Custom content from templates -->
-    <div class="container" ng-view=""></div>
-    <!-- footer -->
-    <div ng-include src="'/views/partials/footer.html'"></div>
+
+    <!-- mobile sliding menu -->
+    <div id="sp-nav" class="hide" ng-controller="UsersController">
+      <ul>
+        <li ng-hide="auth.user"><a ng-href="#/login">Login</a></li>
+        <li ng-show="auth.user"><a ng-href="#/todo">To Do</a></li>
+        <li ng-show="auth.user"><a ng-href="#/havedone">Have Done</a></li>
+        <li ng-show="auth.user"><a ng-href="#/forgotten">Forgotten</a></li>
+        <li ng-show="auth.user"><a ng-href="#/profile">Preferences</a></li>
+        <li ng-show="auth.user"><button class="btn btn-default" ng-click="logout()">logout</button></li>
+      </ul>
+    </div> 
+
+    <div id="sp-page">
+      <!-- Header -->
+      <div ng-include src="'/views/partials/header.html'"></div>
+      <!-- Custom content from templates -->
+      <div class="container" ng-view=""></div>
+      <!-- footer -->
+      <div ng-include src="'/views/partials/footer.html'"></div>
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -57,12 +75,15 @@
     <script src="bower_components/momentjs/moment.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/angular-underscore/angular-underscore.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <!-- endbuild -->
         
+        <!-- vendor -->
+        <script src="vendor/ng-mobile-menu/dist/ng-mobile-menu.min.js"></script>
         <!-- main script -->
         <script src="scripts/app.js"></script>
         <!-- config -->

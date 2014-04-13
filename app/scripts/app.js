@@ -7,5 +7,7 @@ angular.module('icudo', [
   'ngRoute',
   'firebase',
   'toastr',
-  'angular-underscore'
+  'angular-underscore',
+  'ngTouch',
+  'shoppinpal.mobile-menu'
 ]);

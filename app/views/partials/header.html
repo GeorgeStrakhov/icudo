@@ -1,11 +1,3 @@
 <div class="header" ng-controller="UsersController">
-    <ul class="nav nav-pills pull-right">
-        <li ng-hide="auth.user"><a ng-href="#/login">Login</a></li>
-        <li ng-show="auth.user"><a ng-href="#/todo">To Do</a></li>
-        <li ng-show="auth.user"><a ng-href="#/havedone">Have Done</a></li>
-        <li ng-show="auth.user"><a ng-href="#/forgotten">Forgotten</a></li>
-        <li ng-show="auth.user"><a ng-href="#/profile">Preferences</a></li>
-        <li ng-show="auth.user"><button class="btn btn-default" ng-click="logout()">logout</button></li>
-    </ul>
-    <h3 class="text-muted">ICUDO</h3>
+    <button ng-click="$spMenu.toggle()">Menu</button>
 </div>
