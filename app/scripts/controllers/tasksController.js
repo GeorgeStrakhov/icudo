@@ -1,16 +1,20 @@
 'use strict';
 
 angular.module('icudo')
-.controller('TasksController', ['$scope', 'TaskService', 'UserService', '$location', '$log',  function($scope, TaskService, UserService, $location, $log) {
+.controller('TasksController', ['$scope', 'TaskService', 'TimeService', 'UserService', '$location', '$routeParams', '$log',  function($scope, TaskService, TimeService, UserService, $location, $routeParams, $log) {
+
+  //before everything else let's make sure that we have a date in the url (#/do/2014-12-12). else => redirect to today's date
+  var today = $routeParams.date;
+  if(!TimeService.checkDateValid(today)) {
+    redirectToToday();
+  }
 
   //initial data & binding on update the event is emitted from the taskService
-  
   $scope.$on('tasksUpdated', function(){
     $scope.tasks = TaskService.allTasks;
     $scope.today = TaskService.tasks.$id;
   });
 
-  window.scope = $scope;
   //also listen to routeChange and location change since this controller is shared among a few views
   $scope.$on('$locationChangeSuccess', function(){
     //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
@@ -43,5 +47,15 @@ angular.module('icudo')
     $log.log(id);
     $log.error('not implemented yet!');
   };
+
+  /* helper functions */
+  function redirectToToday() {
+    var today = TimeService.getToday();
+    redirectToDate(today);
+  }
+  
+  function redirectToDate(dateString) {
+    $location.path($location.path()+'/'+dateString);
+  }
 
 }]);

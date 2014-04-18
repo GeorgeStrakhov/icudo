@@ -42,9 +42,19 @@ angular.module('icudo')
             UserService.signup(newUser);
         };
 
+        $scope.hideMenu = function() {
+          $spMenu.hide();
+        };
+
         //routeChangeWatching
         $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-          $spMenu.hide() 
+          hideMenu();
         });
+
+        /* helper functions */
+        function hideMenu() {
+          $spMenu.hide() 
+        }
+
 
     }]);

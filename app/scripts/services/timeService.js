@@ -10,10 +10,13 @@ angular.module('icudo')
   var self = this;
   this.now = moment();
 
-  //$log.log('stuff from timeservice');
-
   this.getToday = function() {
     return getFormattedDate(self.now);
+  }
+
+  this.checkDateValid = function(dateString) {
+    if(!dateString) return false;
+    return moment(dateString, 'YYYY-MM-DD', true).isValid(); 
   }
 
   /* internal functions */

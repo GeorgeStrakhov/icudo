@@ -37,7 +37,6 @@ ICUDO is a todo list.
 
 ##Todo
 * UI for switching dates
-* BUG: when slider menu open and click on the same link you are now at - the menu doesn't close
 * css: single mobile brakepoint (xs+sm vs md+lg)
 * slide menu from right to add new task
 * edit task // doubleclick? button?
