@@ -9,5 +9,6 @@ angular.module('icudo', [
   'toastr',
   'angular-underscore',
   'ngTouch',
-  'shoppinpal.mobile-menu'
+  'shoppinpal.mobile-menu',
+  'ui.bootstrap'
 ]);

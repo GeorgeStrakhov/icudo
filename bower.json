@@ -17,7 +17,8 @@
     "momentjs": "~2.5.1",
     "underscore": "~1.6.0",
     "angular-underscore": "*",
-    "angular-touch": "~1.2.16"
+    "angular-touch": "~1.2.16",
+    "angular-bootstrap": "~0.10.0"
   },
   "resolutions": {
     "angular": "1.2.16"

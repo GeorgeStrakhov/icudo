@@ -19,6 +19,10 @@ angular.module('icudo')
     return moment(dateString, 'YYYY-MM-DD', true).isValid(); 
   }
 
+  this.formatDate = function(dateObject) {
+    return getFormattedDate(moment(dateObject));
+  }
+
   /* internal functions */
   function getFormattedDate(theMoment, format) {
     format = (format) ? format : 'YYYY-MM-DD';

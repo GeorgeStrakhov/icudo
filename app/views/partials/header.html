@@ -1,6 +1,13 @@
 <div class="header" ng-controller="UsersController">
     <button ng-click="$spMenu.toggle()" class="btn btn-sm visible-xs visible-sm">Menu</button>
-    {{today}}
+
+    <div ng-controller="DatePickerController">
+      <a href ng-click="open($event)">{{today}}</a>
+      <p class="input-group">
+      <input type="text" class="form-control hide" datepicker-popup="yyyy-mm-dd" ng-model="dt" is-open="opened" ng-required="true" show-button-bar="false" close-text="Close" />
+      </p>
+    </div>
+
     <div class="navbar visible-md visible-lg">
       <nav class="navbar">
         <ul class="nav navbar-nav ">

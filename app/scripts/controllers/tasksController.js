@@ -12,14 +12,13 @@ angular.module('icudo')
   //initial data & binding on update the event is emitted from the taskService
   $scope.$on('tasksUpdated', function(){
     $scope.tasks = TaskService.allTasks;
-    $scope.today = TaskService.tasks.$id;
   });
 
   //also listen to routeChange and location change since this controller is shared among a few views
   $scope.$on('$locationChangeSuccess', function(){
     //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
     var newDate = $location.$$path.split('/')[2];
-    TaskService.changeDate(newDate);
+    //TaskService.changeDate(newDate);
   });
 
   //get current user
@@ -55,7 +54,8 @@ angular.module('icudo')
   }
   
   function redirectToDate(dateString) {
-    $location.path($location.path()+'/'+dateString);
+    //this is not good. there is duplication. we should use taskservice to do it like with the datepicker. TODO: clean up
+    $location.path('do/'+dateString);
   }
 
 }]);

@@ -6,9 +6,10 @@
  */
 
 angular.module('icudo')
-.service('TaskService', ['$q', '$firebase', '$routeParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $firebase, $routeParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
+.service('TaskService', ['$q', '$timeout', '$firebase', '$routeParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $timeout, $firebase, $routeParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
 
   /* initialization */
+  var justChangedLocation = false;
   var self = this;
   this.user = UserService.user;
   this.tasks = getDayTasks(); 
@@ -24,8 +25,28 @@ angular.module('icudo')
   };
 
 
-  /* listen to collection load and update and refresh data (different subsets of tasks) accordingly */
+  //listen to collection load and update and refresh data (different subsets of tasks) accordingly
   attachListeners(self.tasks);
+
+  //listen to the diffirent controllers emitting changeDate event!
+  $rootScope.$on('changeDate', function(e, newDate) {
+    self.changeDate(newDate, true); //passing true to also update the location
+  });
+  
+
+  //also listen to location change since the user may manually edit the url in the url bar
+  $rootScope.$on('$locationChangeSuccess', function(){
+    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
+    if(!justChangedLocation)
+    {
+      var newDate = $location.$$path.split('/')[2];
+      self.changeDate(newDate);
+    }
+    //debounce to avoid multiple calls and expensive filtering calculations
+    $timeout(function(){
+      justChangedLocation = false;
+    }, 200);
+  });
 
   //add new task
   this.addNewTask = function(taskObj) {
@@ -53,13 +74,17 @@ angular.module('icudo')
   };
 
   //fetch new tasks for a given date; if no date is given - then for today
-  this.changeDate = function(date) {
+  this.changeDate = function(date, shouldUpdateLocation) {
     var deferred = $q.defer();
     self.tasks = getDayTasks(date); 
     $rootScope.globalLoading = true;
     self.tasks.$on('loaded', function(s) {
       attachListeners(self.tasks);
       $rootScope.globalLoading = false;
+      if(shouldUpdateLocation) {
+        updateLocation();
+        justChangedLocation = true;
+      }
       deferred.resolve(true);
     }, function(e) {
       $log.error(e);
@@ -114,14 +139,27 @@ angular.module('icudo')
   }
 
 
+  //bring url in sync with current collection
+  function updateLocation() {
+    var newDate = self.tasks.$id;
+    $location.path('do/'+newDate);
+  }
+
+
   // reapply filters and reassign data
   var filteredTasks;
+  //debouncing filtering to avoid expensive calculations. this is a hack. need to understand why without it filtering is sometimes redone multiple times per update. TODO: unhack;
+  var justFiltered = false
   function refreshData() {
-    filteredTasks = $filter('tasksFilter')(self.tasks);
-    self.allTasks.focus = filteredTasks.focus;
-    self.allTasks.todo = filteredTasks.todo;
-    self.allTasks.done = filteredTasks.done;
-    $rootScope.$broadcast('tasksUpdated');
+    if(!justFiltered) {
+      filteredTasks = $filter('tasksFilter')(self.tasks);
+      self.allTasks.focus = filteredTasks.focus;
+      self.allTasks.todo = filteredTasks.todo;
+      self.allTasks.done = filteredTasks.done;
+      $rootScope.$broadcast('tasksUpdated');
+    }
+    justFiltered = true;
+    $timeout(function(){justFiltered = false;},200);
   }
 
 }]);
