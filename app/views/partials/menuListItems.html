@@ -1,0 +1,4 @@
+<li ng-hide="auth.user"><a ng-href="#/login">Login</a></li>
+<li ng-show="auth.user"><a ng-href="#/do">Focus</a></li>
+<li ng-show="auth.user"><a ng-href="#/profile">Preferences</a></li>
+<li ng-show="auth.user"><button class="btn btn-default" ng-click="logout()">logout</button></li>

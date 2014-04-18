@@ -2,11 +2,10 @@
 
 /*
  * user service: everything related to users
- * singleton!
  */
 
 angular.module('icudo')
-.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, dataConfig, $rootScope, $location, toastr) {
+.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'StatsService', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, StatsService, dataConfig, $rootScope, $location, toastr) {
 
         var Auth = AuthFactory;
         var self = this;
@@ -50,7 +49,7 @@ angular.module('icudo')
                    $rootScope.goToNext = false;
                } else {
                    //default route to go to 
-                   $location.path('/todo');
+                   $location.path('/do');
                }
                toastr.success('Welcome back!');
             }, function(error) {
@@ -102,7 +101,7 @@ angular.module('icudo')
 
     function logLastLoginTime(userObj) {
         var now = new Date().getTime();
-        userObj.$update({
+        userObj.$child('metaData').$update({
             lastLoginTime: now
         });
     }

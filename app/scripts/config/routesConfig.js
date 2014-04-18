@@ -19,7 +19,7 @@ angular.module('icudo')
           templateUrl: '/views/signup.html',
           controller: 'UsersController'
       })
-      .when('/todo', {
+      .when('/do', {
         templateUrl: '/views/todo.html',
         controller: 'TasksController',
         resolve: {
@@ -28,17 +28,8 @@ angular.module('icudo')
             }
         }
       })
-      .when('/havedone', {
-        templateUrl: '/views/havedone.html',
-        controller: 'TasksController',
-        resolve: {
-            'auth': function(SecurityService) {
-                return SecurityService.check();
-            }
-        }
-      })
-      .when('/forgotten', {
-        templateUrl: '/views/forgotten.html',
+      .when('/do/:date/', {
+        templateUrl: '/views/todo.html',
         controller: 'TasksController',
         resolve: {
             'auth': function(SecurityService) {

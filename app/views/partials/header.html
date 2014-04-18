@@ -1,3 +1,10 @@
 <div class="header" ng-controller="UsersController">
-    <button ng-click="$spMenu.toggle()" class="btn btn-sm">Menu</button>
+    <button ng-click="$spMenu.toggle()" class="btn btn-sm visible-xs visible-sm">Menu</button>
+    <div class="navbar visible-md visible-lg">
+      <nav class="navbar">
+        <ul class="nav navbar-nav ">
+          <div ng-include src="'/views/partials/menuListItems.html'"></div>
+        </ul>
+      </nav>
+    </div>
 </div>

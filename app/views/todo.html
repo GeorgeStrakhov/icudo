@@ -1,34 +1,36 @@
 <div class="row">
   <div ng-include src="'/views/partials/loading.html'"></div>
   <div ng-show="allLoaded">
-    <h4>Your Focus for today:</h4>
+    <h4>{{today}}:</h4>
     <table class="table table-hover tasks-table">
       <tbody>
         <tr class="focusTasksRow" ng-repeat="task in tasks.focus" ng-include="'/views/partials/singleActiveTaskRowInside.html'"></tr>
-        <tr ng-repeat="task in tasks.active" ng-include="'/views/partials/singleActiveTaskRowInside.html'"></tr>
+        <tr ng-repeat="task in tasks.todo" ng-include="'/views/partials/singleActiveTaskRowInside.html'"></tr>
       </tbody>
     </table>
     <hr />
-    <form class="form-inline" role="form" ng-submit="addTask()"> 
-      <div class="form-group">
-        <input type="text" class="form-control" id="newTaskInput" placeholder="Enter task" ng-model="newTask.name" required>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="newTask.important"> important
-        </label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="newTask.cool"> cool
-        </label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="newTask.urgent"> urgent
-        </label>
-      </div>
-      <button type="submit" class="btn btn-success">add</button>
-    </form>
+    <div class="">
+      <form class="form-inline" role="form" ng-submit="addTask()"> 
+        <div class="form-group">
+          <input type="text" class="form-control" id="newTaskInput" placeholder="Enter task" ng-model="newTask.name" required>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="newTask.important"> important
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="newTask.cool"> cool
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="newTask.urgent"> urgent
+          </label>
+        </div>
+        <button type="submit" class="btn btn-success">add</button>
+      </form>
+    </div>
   </div>
 </div>

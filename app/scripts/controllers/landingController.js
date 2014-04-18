@@ -7,7 +7,7 @@ angular.module('icudo')
     $scope.auth = Auth;
     $scope.auth.$getCurrentUser().then(function(){
             if(Auth.user) {
-                $location.path('/todo');
+                $location.path('/do');
             }
         });
 

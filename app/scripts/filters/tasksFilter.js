@@ -3,7 +3,7 @@
 /* 
  * Matterness filter: filters a collection of tasks by icudo metterness and returns an object, containing 4 arrays:
  * 1) array of focus tasks
- * 2) array of active tasks
+ * 2) array of todo tasks
  * 3) array of done tasks
  * 4) array of forgotten tasks
 
@@ -17,7 +17,7 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
   var tasks = [];
   var filteredTasks = {};
   var taskParams = ['important', 'cool', 'urgent'];
-  var taskStatuses = ['active', 'done', 'forgotten'];
+  var taskStatuses = ['todo', 'done'];
   var filterFunction = function(input) {
     //is the collection empty? return
     if(input.$getIndex().length < 1) return input;
@@ -50,16 +50,16 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
       if(task.status) filteredTasks[task.status].push(task);
     });
     
-    /* active tasks extra logic */
+    /* todo tasks extra logic */
     
-    //sort active tasks matterness
-    filteredTasks.active = _.sortBy(filteredTasks.active, function(task) {
+    //sort todo tasks matterness
+    filteredTasks.todo = _.sortBy(filteredTasks.todo, function(task) {
       return task.matterness;
     }).reverse();
     
     //pick the top three for focus based on a logic that there has to be at least 1 of each (important, cool, urgent) 
     _.each(taskParams, function(what) {
-      var singleParamTasks = _.filter(filteredTasks.active, function(task) {return task[what] == true});
+      var singleParamTasks = _.filter(filteredTasks.todo, function(task) {return task[what] == true});
       var found = false;
       _.each(singleParamTasks, function(t) {
         if(!found) {
@@ -72,16 +72,19 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
     });
 
     //make sure that there are at least 3 tasks to focus on, even if rules do not match
+    //TODO: this is ugly. refactor
     for (var z=0; z<3; z++) {
-      if(filteredTasks.focus.length < 3 && filteredTasks.active.length > 0) {
-        if(_.indexOf(filteredTasks.focus, filteredTasks.active[z]) < 0) {
-          filteredTasks.focus.push(filteredTasks.active[z]);
+      if(filteredTasks.focus.length < 3 && filteredTasks.todo.length > 0) {
+        if(_.indexOf(filteredTasks.focus, filteredTasks.todo[z]) < 0) {
+          if(filteredTasks.todo[z]) {
+            filteredTasks.focus.push(filteredTasks.todo[z]);
+          }
         }
       }
     }
 
-    //now get rid of duplication: remove the tasks that are in the focus from the list of active tasks
-    filteredTasks.active = _.difference(filteredTasks.active, filteredTasks.focus);
+    //now get rid of duplication: remove the tasks that are in the focus from the list of todo tasks
+    filteredTasks.todo = _.difference(filteredTasks.todo, filteredTasks.focus);
 
     //finally sort focus by matterness
     filteredTasks.focus = _.sortBy(filteredTasks.focus, function(task) {

@@ -5,7 +5,7 @@ We all want to do more than we can.
 Todo lists get out of hand. Prioritizing sucks. Planning too much and accomplishing too litle is painful. And with everything becoming an uber-high-priority tasks - you end up spending your days doing only urgent stuff, and never quite doing the important things.
 
 ##Solution
-ICUDO - a simple system to focus on what matters. The principle is simple:Every day start afresh and do at least 3 things: one that is important, one that is cool and one that is urgent.
+ICUDO - a simple system to focus on what matters. The principle is simple: Every day start afresh and do at least 3 things: one that is important, one that is cool and one that is urgent.
 
 ##How it works
 ICUDO is a todo list.
@@ -15,11 +15,35 @@ ICUDO is a todo list.
 4. When you are done - you cross things off
 5. When you log in tomorrow (first login each day) you are prompted to clean up your list: mark the dones, and for each undone you either need to move it to today or forget about it
 
+##Data structure
++-- appData
+|   +-- stats
+|       +-- visits 
++-- users (key: "UID")
+|   +-- userData
+|       +-- name (string)
+|       +-- email (string)
+|   +-- metaData
+|       +-- lastLoginTime (timestamp)
+|   +-- days (key: "YYYY-MM-DD")
+|       +-- tasks (key: UUID hash)
+|           +-- name (string)
+|           +-- createdAt (timestamp)
+|           +-- updatedAt (timestamp)
+|           +-- important (boolean)
+|           +-- cool (boolean)
+|           +-- urgent (boolean)
+|           +-- status (string "todo" || "done")
+
 ##Todo
+* UI for switching dates
+* BUG: when slider menu open and click on the same link you are now at - the menu doesn't close
+* css: single mobile brakepoint (xs+sm vs md+lg)
+* slide menu from right to add new task
 * edit task // doubleclick? button?
-* global loading indicator
-* UI (todo, have done, forgotten)
+* global loading indicator => $rootScope.globalLoading
+* UI (todo / have done)
 * mobile friendly (foldable menu (or sidemenu?) etc.)
 * password recovery when new browser window! - entry points...
-* show special screen for the first login a day (after 4am) => logic inside UserService
-* performance test: what if there are 6000 tasks in the your account?
+* show special screen for the first login a day (after 4am) => logic inside UserService. prompt to copy undone tasks from yesterday
+* performance test: what if there are 6000 tasks in the your account? (should now not be a problem since only one day is loaded);

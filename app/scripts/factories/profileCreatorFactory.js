@@ -6,7 +6,7 @@ angular.module('icudo')
       ProfileCreatorFactory.createProfile = function(uid, userObj) {
           $log.log(uid, userObj);
           var deferred = $q.defer();
-          var u = $firebase(new Firebase(dataConfig.firebaseBaseUrl+'/users/'+uid));
+          var u = $firebase(new Firebase(dataConfig.firebaseBaseUrl+'/users/'+uid+'/userData'));
           u.$set(userObj).then(function(){
               deferred.resolve(u);
           }, function(err){
