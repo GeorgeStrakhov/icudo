@@ -98,9 +98,11 @@ angular.module('icudo')
     if(!userId) {
       userId = UserService.user.$id;
     }
-    if(!date) {
+    if(!date || !TimeService.validateDateString(date)) {
       date = getDate();
     }
+    //this smells. may be doesn't belong here. better put it in the TimeService? but then it has a rootScope dependency? TODO: figure out.
+    $rootScope.today = date;
     return new Firebase(dataConfig.firebaseBaseUrl+'/users/'+userId+'/tasks/'+date+'/');
   }
 

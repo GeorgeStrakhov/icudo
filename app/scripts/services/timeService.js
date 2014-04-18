@@ -14,7 +14,7 @@ angular.module('icudo')
     return getFormattedDate(self.now);
   }
 
-  this.checkDateValid = function(dateString) {
+  this.validateDateString = function(dateString) {
     if(!dateString) return false;
     return moment(dateString, 'YYYY-MM-DD', true).isValid(); 
   }

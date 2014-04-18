@@ -5,7 +5,7 @@ angular.module('icudo')
 
   //before everything else let's make sure that we have a date in the url (#/do/2014-12-12). else => redirect to today's date
   var today = $routeParams.date;
-  if(!TimeService.checkDateValid(today)) {
+  if(!TimeService.validateDateString(today)) {
     redirectToToday();
   }
 
