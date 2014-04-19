@@ -3,6 +3,36 @@
 /* angular-ui-bootstrap fix */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; };
 
+
+/* top menu bar */
+.icudo-navbar {
+  width: 100%;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.icudo-menu-button {
+  margin: 3px;
+}
+
+//datepicker
+.datepicker-td {
+  width: 288px; //this is a hacky trick to enable centered positining for the datepicker
+  @media #{$bp-tiny} {
+    width: auto;
+  }
+}
+.datepicker-wrapper .dropdown-menu {
+  margin-top: 50px;
+  left: auto !important;
+  right: auto !important;
+  //ugly hack for tiny screens
+  @media #{$bp-tiny} {
+    left: 0 !important;
+    right: 0 !important;
+  }
+}
+
 /* displaying tasks table */
 
 .tasks-table {
@@ -49,6 +79,11 @@
 /* general helpers */
 .crossed {
   text-decoration: line-through;
+}
+
+.centered {
+  text-align: center;
+  float:none;
 }
 
 .red {

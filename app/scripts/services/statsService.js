@@ -5,13 +5,17 @@
  */
 
 angular.module('icudo')
-  .service('StatsService', ['$log', 'StatsFactory', function($log, StatsFactory) {
-    var self = this;
-    
-    //logVisit
-    this.logVisit = function() {
-      StatsFactory.$add(1);
-    };
+.service('StatsService', ['$log', 'StatsFactory', 'TimeService', function($log, StatsFactory, TimeService) {
+  var self = this;
+  var today = TimeService.getToday(); 
 
-    this.logVisit();
-  }]);
+  //logVisit
+  this.logVisit = function() {
+    StatsFactory.$child('visits').$child(today).$transaction(function(current_value) {
+      return current_value + 1;
+    });
+  };
+
+  self.logVisit();
+
+}]);

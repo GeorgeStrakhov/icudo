@@ -19,6 +19,7 @@ ICUDO is a todo list.
 +-- appData
 |   +-- stats
 |       +-- visits 
+|           +-- days (key: "YYYY-MM-DD", val: visits); 
 +-- users (key: "UID")
 |   +-- userData
 |       +-- name (string)

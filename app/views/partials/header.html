@@ -1,18 +1,20 @@
-<div class="header" ng-controller="UsersController">
-    <button ng-click="$spMenu.toggle()" class="btn btn-sm visible-xs visible-sm">Menu</button>
-
-    <div ng-controller="DatePickerController">
-      <a href ng-click="open($event)">{{today}}</a>
-      <p class="input-group">
-      <input type="text" class="form-control hide" datepicker-popup="yyyy-mm-dd" ng-model="dt" is-open="opened" ng-required="true" show-button-bar="false" close-text="Close" />
-      </p>
-    </div>
-
-    <div class="navbar visible-md visible-lg">
-      <nav class="navbar">
-        <ul class="nav navbar-nav ">
-          <div ng-include src="'/views/partials/menuListItems.html'"></div>
-        </ul>
-      </nav>
-    </div>
+<div ng-controller="UsersController">
+  <table class="icudo-navbar icudo-navbar-mobile">
+    <tr>
+      <td>
+        <button ng-click="$spMenu.toggle()" class="btn btn-sm icudo-menu-button pull-left">...</button>
+      </td>
+      <td class="datepicker-td">
+        <div class="centered" ng-controller="DatePickerController">
+          <a href ng-click="open($event)">{{today}}</a>
+          <div class="datepicker-wrapper">
+            <input type="text" class="form-control hide" datepicker-popup="yyyy-mm-dd" ng-model="dt" is-open="opened" ng-required="true" show-button-bar="false" close-text="Close" />
+          </div>
+        </div>
+      </td>
+      <td>
+        <button ng-click="alert('not ready');" class="btn btn-sm icudo-menu-button pull-right">+</button>
+      </td>
+    </tr>
+  </table>
 </div>
