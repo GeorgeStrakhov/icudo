@@ -36,10 +36,9 @@ ICUDO is a todo list.
 |           +-- status (string "todo" || "done")
 
 ##Todo
-* UI for switching dates
 * css: single mobile brakepoint (xs+sm vs md+lg)
 * slide menu from right to add new task
-* edit task // doubleclick? button?
+* edit task // doubleclick? button? => doubletap or long hold with hammer.js
 * global loading indicator => $rootScope.globalLoading
 * UI (todo / have done)
 * mobile friendly (foldable menu (or sidemenu?) etc.)
