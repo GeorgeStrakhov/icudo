@@ -2,7 +2,7 @@
   <table class="icudo-navbar icudo-navbar-mobile">
     <tr>
       <td>
-        <button ng-click="$spMenu.toggle()" class="btn btn-sm icudo-menu-button pull-left">...</button>
+        <a ng-href ng-click="$spMenu.toggle()" class="btn btn-default btn-sm icudo-menu-button pull-left">...</button>
       </td>
       <td class="datepicker-td">
         <div class="centered" ng-controller="DatePickerController">
@@ -13,7 +13,7 @@
         </div>
       </td>
       <td>
-        <button ng-click="alert('not ready');" class="btn btn-sm icudo-menu-button pull-right">+</button>
+        <a ng-href="#/do/{{today}}/add" class="btn btn-default btn-sm icudo-menu-button pull-right">+</a>
       </td>
     </tr>
   </table>
