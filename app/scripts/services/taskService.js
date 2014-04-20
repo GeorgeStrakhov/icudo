@@ -24,13 +24,20 @@ angular.module('icudo')
     status: "todo"
   };
 
-
   //listen to collection load and update and refresh data (different subsets of tasks) accordingly
   attachListeners(self.tasks);
 
   //listen to the diffirent controllers emitting changeDate event!
   $rootScope.$on('changeDate', function(e, newDate) {
     self.changeDate(newDate, true); //passing true to also update the location
+  });
+
+
+  //also listen to routeChange and location change since this controller is shared among a few views
+  $rootScope.$on('$locationChangeSuccess', function(){
+    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
+    var newDate = $location.$$path.split('/')[2];
+    //TaskService.changeDate(newDate);
   });
   
 
@@ -48,23 +55,43 @@ angular.module('icudo')
     }, 200);
   });
 
+  //get task from id NB! assumes from the current date only!
+  this.getTaskById = function(taskId) {
+    return self.tasks.$child(taskId);
+  };
+
   //add new task
-  this.addNewTask = function(taskObj) {
+  this.addNewTask = function(taskObj, redirectToAllTasks) {
     _.defaults(taskObj, self.defaultTaskObj);
     taskObj.createdAt = new Date().getTime();
     taskObj.updatedAt = new Date().getTime();
     self.tasks.$add(taskObj).then(function(ref){
       $log.log('task added: '+ref.name());
+      if(redirectToAllTasks) {
+        updateLocation();
+      } else {
+        toastr.success('Task added!');
+      }
     }, function(err){
       toastr.error(err.code);
       $log.log(err);
     });
+
   };
 
   //change task status
   this.changeTaskStatus = function(id, newStatus) {
     updateTask(id, {"status" : newStatus});
   };
+
+  //update task
+  this.updateTask = function (id, updatedTaskObj, shouldRedirectToAllTasks) {
+    updateTask(id, updatedTaskObj);
+    if(shouldRedirectToAllTasks) {
+      updateLocation();
+    }
+  };
+
 
   //toggle task attribute
   this.toggleTaskAttribute = function(id, attr) {
@@ -127,6 +154,7 @@ angular.module('icudo')
       date = getDate();
     }
     //this smells. may be doesn't belong here. better put it in the TimeService? but then it has a rootScope dependency? TODO: figure out.
+    //but we need some way of globally storing the day
     $rootScope.today = date;
     return new Firebase(dataConfig.firebaseBaseUrl+'/users/'+userId+'/tasks/'+date+'/');
   }

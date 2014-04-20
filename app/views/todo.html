@@ -6,29 +6,5 @@
         <tr ng-repeat="task in tasks.todo" ng-include="'/views/partials/singleActiveTaskRowInside.html'"></tr>
       </tbody>
     </table>
-    <hr />
-    <div class="">
-      <form class="form-inline" role="form" ng-submit="addTask()"> 
-        <div class="form-group">
-          <input type="text" class="form-control" id="newTaskInput" placeholder="Enter task" ng-model="newTask.name" required>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="newTask.important"> important
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="newTask.cool"> cool
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="newTask.urgent"> urgent
-          </label>
-        </div>
-        <button type="submit" class="btn btn-success">add</button>
-      </form>
-    </div>
   </div>
 </div>

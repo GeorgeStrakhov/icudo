@@ -10,15 +10,9 @@ angular.module('icudo')
   }
 
   //initial data & binding on update the event is emitted from the taskService
+  $scope.tasks = TaskService.allTasks;
   $scope.$on('tasksUpdated', function(){
     $scope.tasks = TaskService.allTasks;
-  });
-
-  //also listen to routeChange and location change since this controller is shared among a few views
-  $scope.$on('$locationChangeSuccess', function(){
-    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
-    var newDate = $location.$$path.split('/')[2];
-    //TaskService.changeDate(newDate);
   });
 
   //get current user
@@ -29,6 +23,11 @@ angular.module('icudo')
     TaskService.addNewTask($scope.newTask);
     //clean up the input
     $scope.newTask = {};
+  };
+
+  //go to editing task
+  $scope.goToEdit = function(id) {
+    $location.path($location.path()+'edit/'+id);
   };
 
   //toggle attribute important / cool / urgent
