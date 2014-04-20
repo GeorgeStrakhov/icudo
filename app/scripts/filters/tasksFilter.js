@@ -5,7 +5,6 @@
  * 1) array of focus tasks
  * 2) array of todo tasks
  * 3) array of done tasks
- * 4) array of forgotten tasks
 
  * Focus logic:
  * 1) general matterness = isImportant + isUrgent + isCool
@@ -61,6 +60,13 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
     _.each(taskParams, function(what) {
       var singleParamTasks = _.filter(filteredTasks.todo, function(task) {return task[what] == true});
       var found = false;
+      //if there is at least one of [what] (i,c,u) in the done - don't force it to the focus
+      _.each(filteredTasks.done, function(doneTask) {
+        if(doneTask[what] == true){
+          found = true;
+        }
+      });
+      //if the task of this [what] was not found in the done - find the first one and force it into the focus
       _.each(singleParamTasks, function(t) {
         if(!found) {
           found = true;
@@ -98,11 +104,6 @@ angular.module('icudo').filter('tasksFilter', ['$log', function($log) {
       return task.updatedAt;
     }).reverse();
     
-    //add a formatted updated date to done tasks
-    _.each(filteredTasks.done, function(task) {
-      task.dateUpdated = moment(task.updatedAt).format("YYYY.MM.DD");
-    });
-
     count++;
     $log.log('matterness filter used '+count+' times by now');
     return filteredTasks; 
