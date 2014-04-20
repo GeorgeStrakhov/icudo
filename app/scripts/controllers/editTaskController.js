@@ -10,14 +10,9 @@ angular.module('icudo')
   $scope.task = TaskService.getTaskById(taskId);
 
   //save edit task
-  $scope.saveTask = function() {
+  $scope.saveTask = function(status) {
+    $scope.task.status = (status == 'done') ? 'done' : 'todo';
     TaskService.updateTask($scope.task.$id, $scope.task, true); //true for redirecting to today
-  };
-
-  //save to done
-  $scope.saveToDone = function() {
-    $scope.task.status = "done";
-    $scope.saveTask();
   };
 
 }]);

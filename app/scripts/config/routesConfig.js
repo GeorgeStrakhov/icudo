@@ -37,6 +37,15 @@ resolve: {
   }
 }
 })
+.when('/do/:date/done', {
+  templateUrl: '/views/done.html',
+controller: 'TasksController',
+resolve: {
+  'auth': function(SecurityService) {
+    return SecurityService.check();
+  }
+}
+})
 .when('/do/:date/add', {
   templateUrl: '/views/editTask.html',
 controller: 'AddTaskController',

@@ -1,5 +1,5 @@
 <div>
-  <form class="form-inline" role="form" ng-submit="saveTask()"> 
+  <form class="form-inline" role="form" ng-submit="saveTask('todo')"> 
     <div class="form-group">
       <input type="text" class="form-control" id="taskInput" placeholder="Enter task" ng-model="task.name" required>
     </div>
@@ -19,6 +19,6 @@
       </label>
     </div>
     <button type="submit" class="btn btn-success">save to todo</button>
-    &nbsp; or <a ng-href ng-click="saveToDone()">save to done</a>
+    &nbsp; or <a href ng-click="saveTask('done')">save to done</a>
   </form>
 </div>

@@ -27,7 +27,7 @@ angular.module('icudo')
 
   //go to editing task
   $scope.goToEdit = function(id) {
-    $location.path($location.path()+'edit/'+id);
+    $location.path('/do/'+today+'/edit/'+id);
   };
 
   //toggle attribute important / cool / urgent
