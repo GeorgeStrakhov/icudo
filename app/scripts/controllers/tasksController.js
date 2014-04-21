@@ -14,6 +14,19 @@ angular.module('icudo')
   $scope.$on('tasksUpdated', function(){
     $scope.tasks = TaskService.allTasks;
   });
+  
+  $scope.yesterdaysTasks = TaskService.yesterdaysTasks;
+  $scope.yesterdaysActiveTasks = [];
+  $scope.yesterdaysTasks.$on('loaded', function() {
+    $scope.yesterdaysActiveTasks = {};
+    _.each($scope.yesterdaysTasks, function(value, key){
+      if (value.status == 'todo') {
+        value.id = key;
+        $scope.yesterdaysActiveTasks[key] = value;
+      }
+    });
+  });
+
 
   //get current user
   $scope.user = UserService.user;
@@ -40,10 +53,24 @@ angular.module('icudo')
     TaskService.changeTaskStatus(id, status);
   };
 
-  //update task name
-  $scope.updateTaskName = function(id) {
-    $log.log(id);
-    $log.error('not implemented yet!');
+  //whether to show or not to show the alert about unfinished tasks from yesterday
+  $scope.showYesterdaysTasks = function() {
+    //show alert if a) there are some unfinished tasks from yesterday AND b) this is the first visit of today and c) we are on today's page, not on some other date's page
+    if(_.size($scope.yesterdaysActiveTasks)>0 && $scope.user.firstVisitToday && $scope.today == TimeService.getToday()) {
+      return true;
+    }
+  };
+    
+  //copy task from yesterday to today (and remove it from the list of Yesterday's unfinished tasks);
+  $scope.copyTaskToToday = function(yTaskId) {
+    var tObj = $scope.yesterdaysActiveTasks[yTaskId];
+    TaskService.addNewTask(tObj);
+    delete $scope.yesterdaysActiveTasks[yTaskId];
+  };
+
+  //forget yesterday i.e. stop the "unfinished from yesterday" dialouge from showing till tomorrow
+  $scope.forgetYesterday = function() {
+    UserService.user.firstVisitToday = false;
   };
 
   /* helper functions */

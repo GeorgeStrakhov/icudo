@@ -37,12 +37,11 @@ ICUDO is a todo list.
 |           +-- status (string "todo" || "done")
 
 ##Todo
+* test that last visit check works 
+* BUG when logging out some nasty errors... (on days where no tasks?)
 * css: single mobile brakepoint (xs+sm vs md+lg)
-* slide menu from right to add new task
-* edit task // doubleclick? button? => doubletap or long hold with hammer.js
 * global loading indicator => $rootScope.globalLoading
 * UI (todo / have done)
 * mobile friendly (foldable menu (or sidemenu?) etc.)
 * password recovery when new browser window! - entry points...
-* show special screen for the first login a day (after 4am) => logic inside UserService. prompt to copy undone tasks from yesterday
 * performance test: what if there are 6000 tasks in the your account? (should now not be a problem since only one day is loaded);

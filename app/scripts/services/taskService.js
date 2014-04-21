@@ -9,10 +9,14 @@ angular.module('icudo')
 .service('TaskService', ['$q', '$timeout', '$firebase', '$routeParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $timeout, $firebase, $routeParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
 
   /* initialization */
-  var justChangedLocation = false;
   var self = this;
   this.user = UserService.user;
+  this.yesterdaysTasks = getDayTasks(TimeService.getYesterday());
   this.tasks = getDayTasks(); 
+
+  //holder for debouncing location change
+  var justChangedLocation = false;
+
   //holder for filtered and structured data to be given to the controller
   this.allTasks = {};
 
@@ -126,6 +130,7 @@ angular.module('icudo')
   //attach listeners
   function attachListeners(collection) {
     collection.$on('loaded', function(e) {
+      $rootScope.today = self.tasks.$id;
       refreshData();
       collection.$on('change', function(e){
         refreshData();
@@ -153,9 +158,6 @@ angular.module('icudo')
     if(!date || !TimeService.validateDateString(date)) {
       date = getDate();
     }
-    //this smells. may be doesn't belong here. better put it in the TimeService? but then it has a rootScope dependency? TODO: figure out.
-    //but we need some way of globally storing the day
-    $rootScope.today = date;
     return new Firebase(dataConfig.firebaseBaseUrl+'/users/'+userId+'/tasks/'+date+'/');
   }
 
@@ -172,7 +174,6 @@ angular.module('icudo')
     var newDate = self.tasks.$id;
     $location.path('do/'+newDate);
   }
-
 
   // reapply filters and reassign data
   var filteredTasks;

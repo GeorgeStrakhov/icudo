@@ -8,10 +8,14 @@ angular.module('icudo')
 .service('TimeService', ['$log', function($log) {
 
   var self = this;
-  this.now = moment();
+  this.now = moment(); //NB! but don't do anythign with this since momentjs wil mutate the original object with every operation
 
   this.getToday = function() {
     return getFormattedDate(self.now);
+  }
+
+  this.getYesterday = function() {
+    return getFormattedDate(moment().subtract('days', 1));
   }
 
   this.validateDateString = function(dateString) {
@@ -21,6 +25,14 @@ angular.module('icudo')
 
   this.formatDate = function(dateObject) {
     return getFormattedDate(moment(dateObject));
+  }
+
+  this.formatMoment = function(momentObj) {
+    return getFomrattedDate(momentObj);
+  }
+
+  this.formatTimestamp = function(timestamp) {
+    return getFormattedDate(moment(timestamp));
   }
 
   /* internal functions */
