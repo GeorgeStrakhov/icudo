@@ -65,16 +65,22 @@ angular.module('icudo')
   };
 
   //add new task
-  this.addNewTask = function(taskObj, redirectToAllTasks) {
+  this.addNewTask = function(taskObj, params) {
     _.defaults(taskObj, self.defaultTaskObj);
+    _.defaults(params, {
+      redirectToAllTasks: false,
+      notifySuccess: true
+    });
     taskObj.createdAt = new Date().getTime();
     taskObj.updatedAt = new Date().getTime();
     self.tasks.$add(taskObj).then(function(ref){
       $log.log('task added: '+ref.name());
-      if(redirectToAllTasks) {
+      if(params.redirectToAllTasks) {
         updateLocation();
       } else {
-        toastr.success('Task added!');
+        if(params.notifySuccess) {
+          toastr.success('Task added!');
+        }
       }
     }, function(err){
       toastr.error(err.code);
@@ -153,6 +159,7 @@ angular.module('icudo')
   //getRef given the optional date and userId
   function getRef(date, userId) {
     if(!userId) {
+      if(!UserService.user) return new Firebase(dataConfig.firebaseBaseUrl);
       userId = UserService.user.$id;
     }
     if(!date || !TimeService.validateDateString(date)) {

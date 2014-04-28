@@ -19,12 +19,14 @@ angular.module('icudo')
   $scope.yesterdaysActiveTasks = [];
   $scope.yesterdaysTasks.$on('loaded', function() {
     $scope.yesterdaysActiveTasks = {};
-    _.each($scope.yesterdaysTasks, function(value, key){
-      if (value.status == 'todo') {
-        value.id = key;
-        $scope.yesterdaysActiveTasks[key] = value;
-      }
-    });
+    if($scope.yesterdaysTasks.$getIndex().length > 0) {
+      _.each($scope.yesterdaysTasks, function(value, key){
+        if (value.status == 'todo') {
+          value.id = key;
+          $scope.yesterdaysActiveTasks[key] = value;
+        }
+      });
+    }
   });
 
 
@@ -64,7 +66,7 @@ angular.module('icudo')
   //copy task from yesterday to today (and remove it from the list of Yesterday's unfinished tasks);
   $scope.copyTaskToToday = function(yTaskId) {
     var tObj = $scope.yesterdaysActiveTasks[yTaskId];
-    TaskService.addNewTask(tObj);
+    TaskService.addNewTask(tObj, {notifySuccess: false});
     delete $scope.yesterdaysActiveTasks[yTaskId];
   };
 

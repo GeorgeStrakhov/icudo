@@ -38,10 +38,9 @@ ICUDO is a todo list.
 
 ##Todo
 * test that last visit check works 
-* BUG when logging out some nasty errors... (on days where no tasks?)
+* deal with UI and showing the header...
 * css: single mobile brakepoint (xs+sm vs md+lg)
 * global loading indicator => $rootScope.globalLoading
-* UI (todo / have done)
-* mobile friendly (foldable menu (or sidemenu?) etc.)
+* redo mobile frienly with ng-Animate
 * password recovery when new browser window! - entry points...
 * performance test: what if there are 6000 tasks in the your account? (should now not be a problem since only one day is loaded);

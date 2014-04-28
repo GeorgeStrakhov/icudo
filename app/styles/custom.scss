@@ -12,7 +12,28 @@
 }
 
 .icudo-menu-button {
-  margin: 3px;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #ececec !important;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.icudo-button-logo {
+  background: url(/images/svg/icudo_symbol.svg);
+  background-size: contain;
+  &.menu-open {
+    transform: rotate(90deg);
+  }
+}
+
+
+.icudo-button-plus {
+  background: url(/images/svg/icudo_plus_symbol.svg);
+  background-size: contain;
 }
 
 //datepicker
@@ -61,15 +82,15 @@
   border-radius: $buttonSize;
   &.important {
     border: none;
-    background-color: rgb(0,0,255);
+    background-color: rgb(0,0,187);
   }
   &.cool {
     border: none;
-    background-color: rgb(0,255,0);
+    background-color: rgb(0,128,0);
   }
   &.urgent {
     border: none;
-    background-color: rgb(255,0,0);
+    background-color: rgb(231,0,0);
   }
   &:hover {
     cursor: pointer;

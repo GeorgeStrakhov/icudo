@@ -9,16 +9,15 @@ angular.module('icudo')
         //process on initizalization: token based one time login
         $scope.auth.$getCurrentUser().then(function(user) {
             $scope.user = user;
-            var queryString = $location.search();
-            if (!user && !queryString.email) {
+            if (!user && !$routeParams.email) {
                 $location.path('/login');
                 return;
             }
-            if(queryString.email && queryString.token) {
-                $scope.oldUserPassword = $scope.oldPassword = queryString.token;
+            if($routeParams.email && $routeParams.token) {
+                $scope.oldUserPassword = $scope.oldPassword = $routeParams.token;
                 $scope.auth.$login('password', {
-                    email: queryString.email,
-                    password: queryString.token
+                    email: $routeParams.email,
+                    password: $routeParams.token
                 }).then(function(user) {
                     $scope.user = user;
                     toastr.info('Please set your new password');

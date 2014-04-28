@@ -8,7 +8,7 @@ angular.module('icudo')
   //add task
   $scope.saveTask = function(status) {
     $scope.task.status = (status == 'done') ? 'done' : 'todo';
-    TaskService.addNewTask($scope.task, true); //true for then redirecting to the date
+    TaskService.addNewTask($scope.task, {redirectToAllTasks: true}); //true for then redirecting to the date
   };
 
 }]);

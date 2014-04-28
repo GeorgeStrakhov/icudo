@@ -110,7 +110,7 @@ angular.module('icudo')
 
   function checkFirstLoginToday(userObj) {
     var todayDate = TimeService.getToday();
-    var lastLoginDate = TimeService.formatTimestamp(userObj.metaData.lastLoginTime);
+    var lastLoginDate = (userObj.metaData) ? TimeService.formatTimestamp(userObj.metaData.lastLoginTime) : todayDate;
     return !(todayDate == lastLoginDate);
   }
 
