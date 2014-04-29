@@ -136,6 +136,7 @@ angular.module('icudo')
   //attach listeners
   function attachListeners(collection) {
     collection.$on('loaded', function(e) {
+      $rootScope.globalLoading = false;
       $rootScope.today = self.tasks.$id;
       refreshData();
       collection.$on('change', function(e){

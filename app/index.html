@@ -42,7 +42,9 @@
       <!-- Header -->
       <div ng-include src="'/views/partials/header.html'"></div>
       <!-- Custom content from templates -->
-      <div class="container" ng-view=""></div>
+      <div class="container" ng-view="" ng-hide="globalLoading"></div>
+      <!-- Global loading indicator -->
+      <div ng-include src="'/views/partials/loading.html'"></div>
       <!-- footer -->
       <div ng-include src="'/views/partials/footer.html'"></div>
     </div>
@@ -83,6 +85,7 @@
         <!-- config -->
         <script src="scripts/config/routesConfig.js"></script>
         <script src="scripts/config/dataConfig.js"></script>
+        <script src="scripts/config/initRun.js"></script>
         <!-- factories -->
         <script src="scripts/factories/authFactory.js"></script>
         <script src="scripts/factories/profileCreatorFactory.js"></script>
@@ -98,6 +101,7 @@
         <script src="scripts/controllers/datePickerController.js"></script>
         <script src="scripts/controllers/homeController.js"></script>
         <script src="scripts/controllers/usersController.js"></script>
+        <script src="scripts/controllers/profileController.js"></script>
         <script src="scripts/controllers/tasksController.js"></script>
         <script src="scripts/controllers/addTaskController.js"></script>
         <script src="scripts/controllers/editTaskController.js"></script>

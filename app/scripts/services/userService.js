@@ -13,10 +13,11 @@ angular.module('icudo')
   //subscribe to events
   $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
     $log.log('login!');
+    $rootScope.globalLoading = true;
     self.user = $firebase(new Firebase(dataConfig.firebaseBaseUrl+'/users/'+user.uid));
     self.user.$on('loaded', function(){
-      //set allLoaded flag
-      $rootScope.allLoaded = true;
+      //loading flag to loaded
+      $rootScope.globalLoading = false;
       //check if it's the first login for today; if yes - show unfinished from yesterday prompt
       if(checkFirstLoginToday(self.user)) {
         self.user.firstVisitToday = true;
@@ -29,6 +30,7 @@ angular.module('icudo')
   $rootScope.$on("$firebaseSimpleLogin:logout", function(e) {
     $log.log('logout!');
     self.user = undefined;
+    $rootScope.globalLoading = false;
   });
 
   this.updateUserData = function(id, userObj) {

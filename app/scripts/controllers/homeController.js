@@ -5,7 +5,5 @@ angular.module('icudo')
     
     //Auth
     $scope.auth = Auth;
-
-    //top level scope data e.g. current user etc.
   
   }]);

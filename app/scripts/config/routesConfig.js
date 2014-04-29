@@ -66,7 +66,7 @@ angular.module('icudo')
   })
   .when('/profile', {
     templateUrl: '/views/userProfile.html',
-    controller: 'UsersController',
+    controller: 'ProfileController',
     resolve: {
       'auth': function(SecurityService) {
         return SecurityService.check();
