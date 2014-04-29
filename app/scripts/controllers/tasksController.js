@@ -14,7 +14,8 @@ angular.module('icudo')
   $scope.$on('tasksUpdated', function(){
     $scope.tasks = TaskService.allTasks;
   });
-  
+
+  //load and add id to yesterday's tasks
   $scope.yesterdaysTasks = TaskService.yesterdaysTasks;
   $scope.yesterdaysActiveTasks = [];
   $scope.yesterdaysTasks.$on('loaded', function() {
