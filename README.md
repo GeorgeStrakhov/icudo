@@ -17,44 +17,25 @@ ICUDO is a todo-done list.
 6. For every date (past or future) - see what's in the todo and what was done
 
 ##Data structure
-+-- appData
-
-|   +-- stats
-
-|       +-- visits 
-
-|           +-- days (key: "YYYY-MM-DD", val: visits); 
-
-+-- users (key: "UID")
-
-
-|   +-- userData
-
-|       +-- name (string)
-
-|       +-- email (string)
-
-|   +-- metaData
-
-|       +-- lastLoginTime (timestamp)
-
-|   +-- days (key: "YYYY-MM-DD")
-
-|       +-- tasks (key: UUID hash)
-
-|           +-- name (string)
-
-|           +-- createdAt (timestamp)
-
-|           +-- updatedAt (timestamp)
-
-|           +-- important (boolean)
-
-|           +-- cool (boolean)
-
-|           +-- urgent (boolean)
-
-|           +-- status (string "todo" || "done")
+    +-- appData
+    |   +-- stats
+    |       +-- visits 
+    |           +-- days (key: "YYYY-MM-DD", val: visits); 
+    +-- users (key: "UID")
+    |   +-- userData
+    |       +-- name (string)
+    |       +-- email (string)
+    |   +-- metaData
+    |       +-- lastLoginTime (timestamp)
+    |   +-- days (key: "YYYY-MM-DD")
+    |       +-- tasks (key: UUID hash)
+    |           +-- name (string)
+    |           +-- createdAt (timestamp)
+    |           +-- updatedAt (timestamp)
+    |           +-- important (boolean)
+    |           +-- cool (boolean)
+    |           +-- urgent (boolean)
+    |           +-- status (string "todo" || "done")
 
 
 ##Todo
