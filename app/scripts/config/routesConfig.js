@@ -82,9 +82,9 @@ angular.module('icudo')
       }
     }
   })
-  .when('/changepassword/:email/token/:token', {
+  .when('/resetpassword/:email/token/:token', {
     templateUrl: '/views/changePassword.html',
-    controller: 'ChangePasswordController'
+    controller: 'ResetPasswordController'
   })
   .otherwise({
     redirectTo: '/'

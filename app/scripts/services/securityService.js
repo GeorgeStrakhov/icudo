@@ -38,6 +38,10 @@ angular.module('icudo')
 
       //on logout - go to landing page
       $rootScope.$on('$firebaseSimpleLogin:logout', function(){
+          //one corner case is if we are entering the app from a tokenized auth link.
+          if($location.path().indexOf("token") > -1) {
+              return;
+          }
           $location.path('/');
       });
   }]);
