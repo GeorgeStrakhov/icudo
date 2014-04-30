@@ -69,6 +69,10 @@ angular.module('icudo')
     var tObj = $scope.yesterdaysActiveTasks[yTaskId];
     TaskService.addNewTask(tObj, {notifySuccess: false});
     delete $scope.yesterdaysActiveTasks[yTaskId];
+    //if this is last - forget all
+    if($scope.yesterdaysActiveTasks.length < 1) {
+      UserService.user.firstVisitToday = false;
+    }
   };
 
   //forget yesterday i.e. stop the "unfinished from yesterday" dialouge from showing till tomorrow
