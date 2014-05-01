@@ -40,7 +40,6 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
-* test that last visit check works 
 * bug / question: what if I left the window open overnight? how / when should the date be changed?
 * bug: logout and login leaves you hanging in the 'loading' state
 * deal with UI and showing the header...
