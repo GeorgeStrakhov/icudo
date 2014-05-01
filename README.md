@@ -40,13 +40,13 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
-* migrate to ui-router
 * style menu
 * integrate hammerjs or other mobile-friendly things
 * integrate connection lost detector http://github.hubspot.com/offline/
+* redo mobile frienly with ng-Animate
+* create desktop UI (todo and done in one view?) 
 * bug / question: what if I left the window open overnight? how / when should the date be changed?
 * bug: logout and login leaves you hanging in the 'loading' state
 * deal with UI and showing the header...
 * style global loader (loading partial view)
 * css: single mobile brakepoint (xs+sm vs md+lg)
-* redo mobile frienly with ng-Animate
