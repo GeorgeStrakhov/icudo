@@ -11,7 +11,7 @@ angular.module('icudo')
   /* initialization */
   var self = this;
   this.user = UserService.user;
-  this.yesterdaysTasks = getDayTasks(TimeService.getYesterday());
+  this.yesterdaysActiveTasks = {};
   this.tasks = getDayTasks(); 
 
   //holder for debouncing location change
@@ -102,13 +102,13 @@ angular.module('icudo')
     }
   };
 
-
   //toggle task attribute
   this.toggleTaskAttribute = function(id, attr) {
     var task = self.tasks.$child(id);
     task[attr] = !task[attr];
     task.$save().then(function(s){$log.log('task updated: '+id);}, function(e){$log.error(e);});
   };
+
 
   //fetch new tasks for a given date; if no date is given - then for today
   this.changeDate = function(date, shouldUpdateLocation) {
@@ -130,6 +130,38 @@ angular.module('icudo')
     return deferred.promise;
   };
 
+  //get yesterdays active tasks in an object
+  this.getYesterdaysActiveTasks = function() {
+    var deferred = $q.defer();
+    var allYestTasks = getDayTasks(TimeService.getYesterday());
+    var yestActiveTasks = {};
+    allYestTasks.$on('loaded', function() {
+      if(allYestTasks.$getIndex().length > 0) {
+        _.each(allYestTasks, function(value, key){
+          if (value.status == 'todo') {
+            value.id = key;
+            yestActiveTasks[key] = value;
+          }
+        });
+      }
+      self.yesterdaysActiveTasks = yestActiveTasks;
+      deferred.resolve(yestActiveTasks);
+    }, function(e) {
+      $log.error(e);
+      deferred.reject(e);
+    });
+    return deferred.promise;
+  };
+
+  //remove a task from yesterday's active tasks list by id
+  this.removeYesterdaysTask = function(id) {
+    if(id && self.yesterdaysActiveTasks[id]) {
+      delete self.yesterdaysActiveTasks[id];
+    }
+    if(self.yesterdaysActiveTasks.length < 1) {
+      self.user.firstVisitToday = false;
+    }
+  };
 
   /* helper functions */
 
@@ -169,13 +201,13 @@ angular.module('icudo')
     return new Firebase(dataConfig.firebaseBaseUrl+'/users/'+userId+'/tasks/'+date+'/');
   }
 
+  //get date from routeparams or today
   function getDate() {
     if($routeParams.date) {
       return $routeParams.date;
     }
     return TimeService.getToday();
   }
-
 
   //bring url in sync with current collection
   function updateLocation() {

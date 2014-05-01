@@ -15,21 +15,10 @@ angular.module('icudo')
     $scope.tasks = TaskService.allTasks;
   });
 
-  //load and add id to yesterday's tasks
-  $scope.yesterdaysTasks = TaskService.yesterdaysTasks;
-  $scope.yesterdaysActiveTasks = [];
-  $scope.yesterdaysTasks.$on('loaded', function() {
-    $scope.yesterdaysActiveTasks = {};
-    if($scope.yesterdaysTasks.$getIndex().length > 0) {
-      _.each($scope.yesterdaysTasks, function(value, key){
-        if (value.status == 'todo') {
-          value.id = key;
-          $scope.yesterdaysActiveTasks[key] = value;
-        }
-      });
-    }
+  //load yesterday's tasks that are still in todo
+  TaskService.getYesterdaysActiveTasks().then(function(d){
+    $scope.yesterdaysActiveTasks = d;
   });
-
 
   //get current user
   $scope.user = UserService.user;
@@ -68,11 +57,7 @@ angular.module('icudo')
   $scope.copyTaskToToday = function(yTaskId) {
     var tObj = $scope.yesterdaysActiveTasks[yTaskId];
     TaskService.addNewTask(tObj, {notifySuccess: false});
-    delete $scope.yesterdaysActiveTasks[yTaskId];
-    //if this is last - forget all
-    if($scope.yesterdaysActiveTasks.length < 1) {
-      UserService.user.firstVisitToday = false;
-    }
+    TaskService.removeYesterdaysTask(yTaskId);
   };
 
   //forget yesterday i.e. stop the "unfinished from yesterday" dialouge from showing till tomorrow

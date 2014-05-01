@@ -41,7 +41,6 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 ##Todo
 * test that last visit check works 
-* bug: (solved?) first visit of the day: the screen doesn't go away after moving the one and only task from today...
 * bug / question: what if I left the window open overnight? how / when should the date be changed?
 * bug: logout and login leaves you hanging in the 'loading' state
 * deal with UI and showing the header...
