@@ -40,6 +40,10 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
+* migrate to ui-router
+* style menu
+* integrate hammerjs or other mobile-friendly things
+* integrate connection lost detector http://github.hubspot.com/offline/
 * bug / question: what if I left the window open overnight? how / when should the date be changed?
 * bug: logout and login leaves you hanging in the 'loading' state
 * deal with UI and showing the header...

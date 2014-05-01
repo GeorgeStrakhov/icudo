@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('icudo')
-    .controller('UsersController', ['$scope', '$rootScope', '$spMenu', 'UserService', '$log', function($scope, $rootScope, $spMenu, UserService, $log) {
+    .controller('UsersController', ['$scope', '$rootScope', 'UserService', '$log', function($scope, $rootScope, UserService, $log) {
 
         //initialization
         $scope.recoveringPassword = false;
@@ -36,20 +36,5 @@ angular.module('icudo')
             };
             UserService.signup(newUser);
         };
-
-        $scope.hideMenu = function() {
-          $spMenu.hide();
-        };
-
-        //routeChangeWatching
-        $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-          hideMenu();
-        });
-
-        /* helper functions */
-        function hideMenu() {
-          $spMenu.hide() 
-        }
-
 
     }]);

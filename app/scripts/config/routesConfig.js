@@ -11,6 +11,10 @@ angular.module('icudo')
     templateUrl: 'views/landing.html',
     controller: 'LandingController'
   })
+  .when('/menu', {
+    templateUrl: 'views/menu.html',
+    controller: 'UsersController'
+  })
   .when('/login', {
     templateUrl: '/views/login.html',
     controller: 'UsersController'
