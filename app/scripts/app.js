@@ -9,5 +9,6 @@ angular.module('icudo', [
   'toastr',
   'angular-underscore',
   'ngTouch',
+  'ui.router',
   'ui.bootstrap'
 ]);

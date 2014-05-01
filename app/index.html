@@ -24,13 +24,13 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="icudo" ng-controller="MainController">
+  <body ng-app="icudo">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- notifications -->
-    <toaster-container> </toaster-container>
+    <toaster-container></toaster-container>
 
     <!-- Header -->
     <div ng-include src="'/views/partials/header.html'"></div>
@@ -64,6 +64,7 @@
     <script src="bower_components/angular-underscore/angular-underscore.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -89,7 +90,6 @@
         <!-- controllers -->
         <script src="scripts/controllers/landingController.js"></script>
         <script src="scripts/controllers/datePickerController.js"></script>
-        <script src="scripts/controllers/homeController.js"></script>
         <script src="scripts/controllers/usersController.js"></script>
         <script src="scripts/controllers/profileController.js"></script>
         <script src="scripts/controllers/tasksController.js"></script>
