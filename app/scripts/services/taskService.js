@@ -6,7 +6,7 @@
  */
 
 angular.module('icudo')
-.service('TaskService', ['$q', '$timeout', '$firebase', '$routeParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $timeout, $firebase, $routeParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
+.service('TaskService', ['$q', '$timeout', '$firebase', '$stateParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $timeout, $firebase, $stateParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
 
   /* initialization */
   var self = this;
@@ -47,7 +47,7 @@ angular.module('icudo')
 
   //also listen to location change since the user may manually edit the url in the url bar
   $rootScope.$on('$locationChangeSuccess', function(){
-    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
+    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not triggered in chrome if you change the url and hit enter...
     if(!justChangedLocation)
     {
       var newDate = $location.$$path.split('/')[2];
@@ -203,8 +203,8 @@ angular.module('icudo')
 
   //get date from routeparams or today
   function getDate() {
-    if($routeParams.date) {
-      return $routeParams.date;
+    if($stateParams.date) {
+      return $stateParams.date;
     }
     return TimeService.getToday();
   }
@@ -212,7 +212,7 @@ angular.module('icudo')
   //bring url in sync with current collection
   function updateLocation() {
     var newDate = self.tasks.$id;
-    $location.path('do/'+newDate);
+    $location.path('/'+newDate+'/todo/');
   }
 
   // reapply filters and reassign data

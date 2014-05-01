@@ -1,40 +1,41 @@
 'use strict';
 
 angular.module('icudo')
-    .controller('UsersController', ['$scope', '$rootScope', 'UserService', '$log', function($scope, $rootScope, UserService, $log) {
+.controller('UsersController', ['$scope', '$rootScope', 'AuthFactory', 'UserService', '$log', function($scope, $rootScope, Auth, UserService, $log) {
 
-        //initialization
-        $scope.recoveringPassword = false;
-        //get current user
-        $scope.user = UserService.user;
-        
-        //login
-        $scope.tryLogin = function() {
-            UserService.tryLogin($scope.userEmail, $scope.userPassword);
-        };
+  //initialization
+  $scope.recoveringPassword = false;
+  //get current user
+  $scope.user = UserService.user;
+  $scope.auth = Auth;
 
-        //logout
-        $scope.logout = function() {
-            UserService.logout();
-        };
+  //login
+  $scope.tryLogin = function() {
+    UserService.tryLogin($scope.userEmail, $scope.userPassword);
+  };
 
-        //toggle recovering password
-        $scope.toggleRecoveringPassword = function() {
-            $scope.recoveringPassword = !$scope.recoveringPassword;
-        };
+  //logout
+  $scope.logout = function() {
+    UserService.logout();
+  };
 
-        //recover password
-        $scope.recoverPassword = function() {
-            UserService.recoverPassword($scope.userEmail); 
-        };
+  //toggle recovering password
+  $scope.toggleRecoveringPassword = function() {
+    $scope.recoveringPassword = !$scope.recoveringPassword;
+  };
 
-        //signup
-        $scope.signup = function() {
-            var newUser = {
-                "email": $scope.newUserEmail,
-                "name": $scope.newUserName,
-            };
-            UserService.signup(newUser);
-        };
+  //recover password
+  $scope.recoverPassword = function() {
+    UserService.recoverPassword($scope.userEmail); 
+  };
 
-    }]);
+  //signup
+  $scope.signup = function() {
+    var newUser = {
+      "email": $scope.newUserEmail,
+      "name": $scope.newUserName,
+    };
+    UserService.signup(newUser);
+  };
+
+}]);

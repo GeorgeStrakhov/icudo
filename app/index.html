@@ -35,7 +35,7 @@
     <!-- Header -->
     <div ng-include src="'/views/partials/header.html'"></div>
     <!-- Custom content from templates -->
-    <div class="container" ng-view="" ng-hide="globalLoading"></div>
+    <div class="container" ui-view ng-hide="globalLoading"></div>
     <!-- Global loading indicator -->
     <div ng-include src="'/views/partials/loading.html'"></div>
     <!-- global footer -->
@@ -68,37 +68,37 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- endbuild -->
         
-        <!-- main script -->
-        <script src="scripts/app.js"></script>
-        <!-- config -->
-        <script src="scripts/config/routesConfig.js"></script>
-        <script src="scripts/config/dataConfig.js"></script>
-        <script src="scripts/config/initRun.js"></script>
-        <!-- factories -->
-        <script src="scripts/factories/authFactory.js"></script>
-        <script src="scripts/factories/profileCreatorFactory.js"></script>
-        <script src="scripts/factories/statsFactory.js"></script>
-        <!-- services -->
-        <script src="scripts/services/securityService.js"></script>
-        <script src="scripts/services/userService.js"></script>
-        <script src="scripts/services/taskService.js"></script>
-        <script src="scripts/services/statsService.js"></script>
-        <script src="scripts/services/timeService.js"></script>
-        <!-- controllers -->
-        <script src="scripts/controllers/landingController.js"></script>
-        <script src="scripts/controllers/datePickerController.js"></script>
-        <script src="scripts/controllers/usersController.js"></script>
-        <script src="scripts/controllers/profileController.js"></script>
-        <script src="scripts/controllers/tasksController.js"></script>
-        <script src="scripts/controllers/addTaskController.js"></script>
-        <script src="scripts/controllers/editTaskController.js"></script>
-        <script src="scripts/controllers/changePasswordController.js"></script>
-        <script src="scripts/controllers/resetPasswordController.js"></script>
-        <!-- filters -->
-        <script src="scripts/filters/tasksFilter.js"></script>
+    <!-- main script -->
+    <script src="scripts/app.js"></script>
+    <!-- config -->
+    <script src="scripts/config/routesConfig.js"></script>
+    <script src="scripts/config/dataConfig.js"></script>
+    <script src="scripts/config/initRun.js"></script>
+    <!-- factories -->
+    <script src="scripts/factories/authFactory.js"></script>
+    <script src="scripts/factories/profileCreatorFactory.js"></script>
+    <script src="scripts/factories/statsFactory.js"></script>
+    <!-- services -->
+    <script src="scripts/services/securityService.js"></script>
+    <script src="scripts/services/userService.js"></script>
+    <script src="scripts/services/taskService.js"></script>
+    <script src="scripts/services/statsService.js"></script>
+    <script src="scripts/services/timeService.js"></script>
+    <!-- controllers -->
+    <script src="scripts/controllers/landingController.js"></script>
+    <script src="scripts/controllers/datePickerController.js"></script>
+    <script src="scripts/controllers/usersController.js"></script>
+    <script src="scripts/controllers/profileController.js"></script>
+    <script src="scripts/controllers/tasksController.js"></script>
+    <script src="scripts/controllers/addTaskController.js"></script>
+    <script src="scripts/controllers/editTaskController.js"></script>
+    <script src="scripts/controllers/changePasswordController.js"></script>
+    <script src="scripts/controllers/resetPasswordController.js"></script>
+    <!-- filters -->
+    <script src="scripts/filters/tasksFilter.js"></script>
 
 </body>
 </html>

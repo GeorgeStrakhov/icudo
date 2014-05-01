@@ -1,4 +1,4 @@
-<li ng-hide="auth.user"><a ng-href="#/login" ng-click="hideMenu()">Login</a></li>
-<li ng-show="auth.user"><a ng-href="#/do" ng-click="hideMenu()">Focus</a></li>
-<li ng-show="auth.user" ng-click="hideMenu()"><a ng-href="#/profile">Preferences</a></li>
+<li ng-hide="auth.user"><a ng-href="#/login">Login</a></li>
+<li ng-show="auth.user"><a ng-href="#/">Focus</a></li>
+<li ng-show="auth.user"><a ng-href="#/profile">Preferences</a></li>
 <li ng-show="auth.user"><button class="btn btn-default" ng-click="logout()">logout</button></li>

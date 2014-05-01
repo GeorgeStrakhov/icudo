@@ -5,7 +5,7 @@
  */
 
 angular.module('icudo')
-.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'StatsService', 'TimeService', 'dataConfig', '$rootScope', '$location', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, StatsService, TimeService, dataConfig, $rootScope, $location, toastr) {
+.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'StatsService', 'TimeService', 'dataConfig', '$rootScope', '$location', '$state', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, StatsService, TimeService, dataConfig, $rootScope, $location, $state, toastr) {
 
   var Auth = AuthFactory;
   var self = this;
@@ -49,11 +49,12 @@ angular.module('icudo')
     }).then(function(user) {
       //if there is a route to which we should redirect
       if($rootScope.goToNext) {
-        $location.path($rootScope.goToNext);
+        var goToNext = $rootScope.goToNext;
         $rootScope.goToNext = false;
+        $state.go(goToNext.to, goToNext.toParams);
       } else {
         //default route to go to 
-        $location.path('/do');
+        $location.path('/');
       }
       toastr.success('Welcome back!');
     }, function(error) {

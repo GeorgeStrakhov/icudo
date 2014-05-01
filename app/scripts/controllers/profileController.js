@@ -10,7 +10,7 @@ angular.module('icudo')
 
   //update user settings
   $scope.updateUserSettings = function() {
-    UserService.updateUserData($scope.auth.user.uid, $scope.user);
+    UserService.updateUserData($scope.user.uid, $scope.user);
   };
 
 }]);

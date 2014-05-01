@@ -2,22 +2,22 @@
   <table class="icudo-navbar icudo-navbar-mobile">
     <tr>
       <td>
-        <a ng-href="#/menu" class="icudo-menu-button icudo-button-logo pull-left"></a>
+        <a ng-href="#/menu/" class="icudo-menu-button icudo-button-logo pull-left"></a>
       </td>
       <td class="datepicker-td">
         <div class="centered" ng-controller="DatePickerController">
-          <a ng-href="#/do/{{today}}">TODO</a>
+          <a ng-href="#/{{today}}/todo">TODO</a>
           |
           <a href ng-click="open($event)">{{today}}</a>
           <div class="datepicker-wrapper pull-left">
             <input type="text" class="form-control hide" datepicker-popup="yyyy-mm-dd" ng-model="dt" is-open="opened" ng-required="true" show-button-bar="false" close-text="Close" />
           </div>
           |
-          <a ng-href="#/do/{{today}}/done">DONE</a>
+          <a ng-href="#/{{today}}/done">DONE</a>
         </div>
       </td>
       <td>
-        <a ng-href="#/do/{{today}}/add" class="icudo-menu-button icudo-button-plus pull-right"></a>
+        <a ng-href="#/{{today}}/add" class="icudo-menu-button icudo-button-plus pull-right"></a>
       </td>
     </tr>
   </table>

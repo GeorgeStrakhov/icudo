@@ -3,10 +3,10 @@
 /* controller to edit a task */
 
 angular.module('icudo')
-.controller('EditTaskController', ['$scope', 'TaskService','$routeParams', '$log',  function($scope, TaskService, $routeParams, $log) {
+.controller('EditTaskController', ['$scope', 'TaskService','$stateParams', '$log',  function($scope, TaskService, $stateParams, $log) {
   
   //load the task to be edited via uid from the routeparams
-  var taskId = $routeParams.task;
+  var taskId = $stateParams.task;
   $scope.task = TaskService.getTaskById(taskId);
 
   //save edit task

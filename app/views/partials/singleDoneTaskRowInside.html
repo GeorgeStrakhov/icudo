@@ -1,0 +1,8 @@
+<td class="indicator-cell"><span class="task-indicator" ng-class="{important: task.important}" ng-click="toggleTaskAttribute(task.id, 'important')"></span></td>
+<td class="indicator-cell"><span class="task-indicator" ng-class="{cool: task.cool}" ng-click="toggleTaskAttribute(task.id, 'cool')"></span></td>
+<td class="indicator-cell"><span class="task-indicator" ng-class="{urgent: task.urgent}" ng-click="toggleTaskAttribute(task.id, 'urgent')"></span></td>
+<td ng-dblclick="goToEdit(task.id)">
+  <span class="taskName"> 
+    {{task.name}}
+  </span>
+</td>
