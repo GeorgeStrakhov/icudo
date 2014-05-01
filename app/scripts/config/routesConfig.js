@@ -53,8 +53,13 @@ angular.module('icudo')
     }
   })
   .state('date', {
-    url: '/{date:[0-9]{4}-[0-9]{2}-[0-9]{2}}', //matching regex for date patter yyyy-mm-dd 
+    url: '/{date:[0-9]{4}-[0-9]{2}-[0-9]{2}}', //matching regex for date pattern yyyy-mm-dd 
     templateUrl: '/views/date.html',
+    controller: function($state, $stateParams) { //making sure people are not stuck at /yyyy-mm-dd and are redirected to /yyyy-mm-dd/todo
+      if($state.current.name == 'date') {
+        $state.go('date.todo', $stateParams);
+      }
+    },
     resolve: {
       'auth': function(SecurityService) {
         return SecurityService.check();
@@ -82,9 +87,10 @@ angular.module('icudo')
     controller: 'EditTaskController'
   }) //no need to specify resolve since it is inherited from the parent 'date' view
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise('/');
 
-  /* to be trailslash agnostic */
+
+  /* special rules to be trailslash agnostic  */
   $urlRouterProvider.rule(function($injector, $location) {
     var path = $location.path();
     // Note: misnomer. This returns a query object, not a search string
