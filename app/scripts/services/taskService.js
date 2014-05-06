@@ -37,14 +37,6 @@ angular.module('icudo')
   });
 
 
-  //also listen to routeChange and location change since this controller is shared among a few views
-  $rootScope.$on('$locationChangeSuccess', function(){
-    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not trigger in chrome if you change the url and hit enter...
-    var newDate = $location.$$path.split('/')[2];
-    //TaskService.changeDate(newDate);
-  });
-  
-
   //also listen to location change since the user may manually edit the url in the url bar
   $rootScope.$on('$locationChangeSuccess', function(){
     //this is bad hack, but not sure how to deal wth it since routechange sometimes is not triggered in chrome if you change the url and hit enter...
@@ -92,6 +84,7 @@ angular.module('icudo')
   //change task status
   this.changeTaskStatus = function(id, newStatus) {
     updateTask(id, {"status" : newStatus});
+    toastr.success('Moved to '+newStatus+'!');
   };
 
   //update task

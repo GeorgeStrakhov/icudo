@@ -36,11 +36,15 @@
   background-size: contain;
 }
 
-//datepicker
+/* datepicker */
+
 .datepicker-td {
   width: 288px; //this is a hacky trick to enable centered positining for the datepicker
   @media #{$bp-tiny} {
     width: auto;
+    table {
+      margin: 0 auto;
+    }
   }
 }
 .datepicker-wrapper .dropdown-menu {
@@ -58,8 +62,13 @@
 
 .tasks-table {
   tr {
-    td.indicator-cell {
-      width: $buttonSize*1.5;
+    height: 50px;
+    min-height: 50px;
+    td {
+      vertical-align: middle !important;
+      &.indicator-cell {
+        width: $buttonSize*1.5;
+      }
     }
   }
 }
@@ -97,7 +106,25 @@
   }
 }
 
+/* mobile menu */
+.mobileMenu {
+  li {
+    text-align: center;
+    background-color: #eee;
+    margin-bottom: 6px;
+  }
+}
+
+
+/* footer */
+.footer {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 /* general helpers */
+
 .crossed {
   text-decoration: line-through;
 }

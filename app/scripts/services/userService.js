@@ -27,12 +27,6 @@ angular.module('icudo')
     });
   });
 
-  $rootScope.$on("$firebaseSimpleLogin:logout", function(e) {
-    $log.log('logout!');
-    self.user = undefined;
-    $rootScope.globalLoading = false;
-  });
-
   this.updateUserData = function(id, userObj) {
     self.user.$update(userObj).then(function(){
       //make sure the value in this singleton stays fresh
@@ -58,12 +52,17 @@ angular.module('icudo')
       }
       toastr.success('Welcome back!');
     }, function(error) {
+      $log.log(error);
       toastr.error('Something doesn\'t look right, please check and try again');
     });
   };
 
   this.logout = function() {
+    $log.log('logout!');
+    $location.path('/');
     Auth.$logout();
+    self.user = undefined;
+    $rootScope.globalLoading = false;
     toastr.success('Farewell!');
   };
 

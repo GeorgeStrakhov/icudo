@@ -1,22 +1,15 @@
 'use strict';
 
 angular.module('icudo')
-.controller('UsersController', ['$scope', '$rootScope', 'AuthFactory', 'UserService', '$log', function($scope, $rootScope, Auth, UserService, $log) {
+.controller('LoginSignupController', ['$scope', '$rootScope', 'UserService', '$log', function($scope, $rootScope, UserService, $log) {
 
   //initialization
   $scope.recoveringPassword = false;
-  //get current user
-  $scope.user = UserService.user;
-  $scope.auth = Auth;
+  $rootScope.globalLoading = false;
 
   //login
   $scope.tryLogin = function() {
     UserService.tryLogin($scope.userEmail, $scope.userPassword);
-  };
-
-  //logout
-  $scope.logout = function() {
-    UserService.logout();
   };
 
   //toggle recovering password
@@ -27,6 +20,7 @@ angular.module('icudo')
   //recover password
   $scope.recoverPassword = function() {
     UserService.recoverPassword($scope.userEmail); 
+    $scope.recoveringPassword = false;
   };
 
   //signup

@@ -15,17 +15,16 @@ angular.module('icudo')
   .state('menu', {
     url: '/menu/',
     templateUrl: '/views/menu.html',
-    controller: 'UsersController'
   })
   .state('login', {
     url: '/login/',
     templateUrl: '/views/login.html',
-    controller: 'UsersController'
+    controller: 'LoginSignupController'
   })
   .state('signup', {
     url: '/signup/',
     templateUrl: '/views/signup.html',
-    controller: 'UsersController'
+    controller: 'LoginSignupController'
   })
   .state('resetpassword', {
     url: '/resetpassword/:email/token/:token/',
@@ -57,6 +56,7 @@ angular.module('icudo')
     templateUrl: '/views/date.html',
     controller: function($state, $stateParams) { //making sure people are not stuck at /yyyy-mm-dd and are redirected to /yyyy-mm-dd/todo
       if($state.current.name == 'date') {
+        console.log($stateParams);
         $state.go('date.todo', $stateParams);
       }
     },

@@ -40,8 +40,9 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
-* style menu
-* integrate hammerjs or other mobile-friendly things
+* bug: entering the app via a deep link to edit task id results in a redirect
+* bug: after logging out and clicking on a datepicker or tod everything brakes
+* bug: after marking all the yesterdays tasks as done, going to DONE and then coming back - they are still there...
 * integrate connection lost detector http://github.hubspot.com/offline/
 * redo mobile frienly with ng-Animate
 * create desktop UI (todo and done in one view?) 

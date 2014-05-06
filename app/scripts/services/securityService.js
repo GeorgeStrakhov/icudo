@@ -22,6 +22,11 @@ angular.module('icudo')
   return Security;
 }])
 .run(['$rootScope', '$location', '$state', '$log', function($rootScope, $location, $state, $log) {
+  
+  $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
+    $log.info('state changed!');
+    $log.info(toParams);
+  });
 
   //on location that requires auth - save goToNext to rootscope and redirect to login
   $rootScope.$on('$stateChangeError', function(rejection, toState, stateParams, redirectingToState, smth, rejectionReason) {
@@ -38,12 +43,4 @@ angular.module('icudo')
     }
   });
 
-  //on logout - go to landing page
-  $rootScope.$on('$firebaseSimpleLogin:logout', function(){
-    //one corner case is if we are entering the app from a tokenized auth link.
-    if($location.path().indexOf("token") > -1) {
-      return;
-    }
-    $location.path('/');
-  });
 }]);
