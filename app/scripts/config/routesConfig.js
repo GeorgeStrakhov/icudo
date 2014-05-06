@@ -54,7 +54,7 @@ angular.module('icudo')
   .state('date', {
     url: '/{date:[0-9]{4}-[0-9]{2}-[0-9]{2}}', //matching regex for date pattern yyyy-mm-dd 
     templateUrl: '/views/date.html',
-    controller: function($state, $stateParams, $rootScope) { //assigning rootScope.today and making sure people are not stuck at /yyyy-mm-dd and are redirected to /yyyy-mm-dd/todo
+    controller: function($state, $stateParams, $rootScope, $scope) { //assigning rootScope.today and making sure people are not stuck at /yyyy-mm-dd and are redirected to /yyyy-mm-dd/todo
       $rootScope.today = $stateParams.date;
       if($state.current.name == 'date') {
         $state.go('date.todo', $stateParams);
