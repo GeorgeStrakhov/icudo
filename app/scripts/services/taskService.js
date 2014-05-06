@@ -6,7 +6,7 @@
  */
 
 angular.module('icudo')
-.service('TaskService', ['$q', '$timeout', '$firebase', '$stateParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $timeout, $firebase, $stateParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
+.service('TaskService', ['$q', '$timeout', '$firebase', '$state', '$stateParams', 'TimeService', '$log', '$filter', 'dataConfig', '$rootScope', '$location', 'toastr', 'UserService', function($q, $timeout, $firebase, $state, $stateParams, TimeService, $log, $filter, dataConfig, $rootScope, $location, toastr, UserService) {
 
   /* initialization */
   var self = this;
@@ -33,23 +33,7 @@ angular.module('icudo')
 
   //listen to the diffirent controllers emitting changeDate event!
   $rootScope.$on('changeDate', function(e, newDate) {
-    self.changeDate(newDate, true); //passing true to also update the location
-  });
-
-
-  //also listen to location change since the user may manually edit the url in the url bar
-  $rootScope.$on('$locationChangeSuccess', function(){
-    //this is bad hack, but not sure how to deal wth it since routechange sometimes is not triggered in chrome if you change the url and hit enter...
-    if(!justChangedLocation)
-    {
-      var newDate = $location.$$path.split('/')[1];
-      $log.info(newDate);
-      self.changeDate(newDate);
-    }
-    //debounce to avoid multiple calls and expensive filtering calculations
-    $timeout(function(){
-      justChangedLocation = false;
-    }, 200);
+    self.changeDate(newDate); 
   });
 
   //get task from id NB! assumes from the current date only!
@@ -69,7 +53,7 @@ angular.module('icudo')
     self.tasks.$add(taskObj).then(function(ref){
       $log.log('task added: '+ref.name());
       if(params.redirectToAllTasks) {
-        updateLocation();
+        redirectToAllTasks();
       } else {
         if(params.notifySuccess) {
           toastr.success('Task added!');
@@ -92,7 +76,7 @@ angular.module('icudo')
   this.updateTask = function (id, updatedTaskObj, shouldRedirectToAllTasks) {
     updateTask(id, updatedTaskObj);
     if(shouldRedirectToAllTasks) {
-      updateLocation();
+      redirectToAllTasks();
     }
   };
 
@@ -105,17 +89,13 @@ angular.module('icudo')
 
 
   //fetch new tasks for a given date; if no date is given - then for today
-  this.changeDate = function(date, shouldUpdateLocation) {
+  this.changeDate = function(date) {
     var deferred = $q.defer();
     self.tasks = getDayTasks(date); 
     $rootScope.globalLoading = true;
     self.tasks.$on('loaded', function(s) {
       attachListeners(self.tasks);
       $rootScope.globalLoading = false;
-      if(shouldUpdateLocation) {
-        updateLocation();
-        justChangedLocation = true;
-      }
       deferred.resolve(true);
     }, function(e) {
       $log.error(e);
@@ -203,11 +183,10 @@ angular.module('icudo')
     return TimeService.getToday();
   }
 
-  //bring url in sync with current collection
-  function updateLocation() {
-    var newDate = self.tasks.$id;
-    $location.path('/'+newDate+'/todo/');
-  }
+  //redirect to all tasks
+  function redirectToAllTasks() {
+    $state.go('date.todo', {date: $rootScope.today});
+  };
 
   // reapply filters and reassign data
   var filteredTasks;

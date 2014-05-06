@@ -6,14 +6,14 @@
       </td>
       <td class="datepicker-td">
         <div class="centered" ng-controller="DatePickerController">
-          <a ng-href="#/{{today}}/todo">TODO</a>
+          <a ng-href="#/{{today}}/todo/">TODO</a>
           |
           <a href ng-click="open($event)">{{today}}</a>
           <div class="datepicker-wrapper pull-left">
             <input type="text" class="form-control hide" datepicker-popup="yyyy-mm-dd" ng-model="dt" is-open="opened" ng-required="true" show-button-bar="false" close-text="Close" />
           </div>
           |
-          <a ng-href="#/{{today}}/done">DONE</a>
+          <a ng-href="#/{{today}}/done/">DONE</a>
         </div>
       </td>
       <td>

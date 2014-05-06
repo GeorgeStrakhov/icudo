@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('icudo')
-  .controller('DatePickerController', ["$scope", "$log", "$location", 'TimeService', function ($scope, $log, $location, TimeService) {
+  .controller('DatePickerController', ['$scope', '$log', '$state', 'TimeService', function ($scope, $log, $state, TimeService) {
 
-    $scope.dt = new Date();
+    var today = ($scope.today) ? $scope.today : TimeService.getToday();
+    
+    $scope.dt = new Date(today);
 
     $scope.$watch('dt', function(e) {
       var date = TimeService.formatDate($scope.dt);
+      $state.go('date.todo', {date: date}); 
       $scope.$emit('changeDate', date);
     });
 
