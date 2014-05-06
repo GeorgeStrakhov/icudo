@@ -30,6 +30,7 @@ angular.module('icudo')
 
   //on location that requires auth - save goToNext to rootscope and redirect to login
   $rootScope.$on('$stateChangeError', function(rejection, toState, stateParams, redirectingToState, smth, rejectionReason) {
+    $log.info(rejection);
     if(rejectionReason) {
       $rootScope.goToNext = {
         to: toState.name,

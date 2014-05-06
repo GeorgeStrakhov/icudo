@@ -42,7 +42,8 @@ angular.module('icudo')
     //this is bad hack, but not sure how to deal wth it since routechange sometimes is not triggered in chrome if you change the url and hit enter...
     if(!justChangedLocation)
     {
-      var newDate = $location.$$path.split('/')[2];
+      var newDate = $location.$$path.split('/')[1];
+      $log.info(newDate);
       self.changeDate(newDate);
     }
     //debounce to avoid multiple calls and expensive filtering calculations

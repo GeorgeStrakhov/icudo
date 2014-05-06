@@ -3,7 +3,7 @@
 angular.module('icudo')
 .controller('AppController', ['$scope', 'AuthFactory', 'UserService', '$window', '$log', function($scope, Auth, UserService, $window, $log) {
 
- //get current user
+  //get current user
   $scope.user = UserService.user;
   $scope.auth = Auth;
 
