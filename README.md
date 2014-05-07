@@ -2,7 +2,7 @@
 
 ##Problem
 We all want to do more than we can.
-Todo lists get out of hand. Prioritizing sucks. Planning too much and accomplishing too litle is painful. And with everything becoming an uber-high-priority tasks - you end up spending your days doing only urgent stuff, and never quite doing the important things.
+Todo lists get out of hand. Prioritizing sucks. Planning too much and accomplishing too litle is makes us feel unproductive and as a result robes us of happinness. And with everything becoming an uber-high-priority tasks - you end up spending your days doing only urgent stuff, and never quite doing the important things.
 
 ##Solution
 ICUDO - a simple system to focus on what matters. The principle is simple: Every day start afresh and do at least 3 things: one that is important, one that is cool and one that is urgent.
@@ -40,14 +40,15 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
-* interface: header for the profile & change password pages
-* interface: header for the unauthorized pages (login, signup, landing (?))
-* bug: entering the app via a deep link to edit task id results in a redirect
+* landing page text
+* choice of firebase endpoint based on the environment (host location): if icudo.com => icudo else
+* add/edit task to be able to change date
+* header for add/edit with x instead of +
+* add "did it yesterday" to cleaning up yesterdays tasks
+* BUG: entering the app via a deep link to edit task id results in a redirect
 * integrate connection lost detector http://github.hubspot.com/offline/
 * redo mobile frienly with ng-Animate
-* create desktop UI (todo and done in one view?) 
-* bug / question: what if I left the window open overnight? how / when should the date be changed?
-* bug: logout and login leaves you hanging in the 'loading' state
-* deal with UI and showing the header...
+* create desktop UI (todo and done in one view?)  => separate controllers to avoid conflicts?
+* BUG: what if I left the window open overnight? how / when should the date be changed? (!) recheck regularly?
 * style global loader (loading partial view)
-* css: single mobile brakepoint (xs+sm vs md+lg)
+* integrate intercom for user-management & communication: http://docs.intercom.io/integrating-intercom-in-one-page-app

@@ -37,6 +37,7 @@ angular.module('icudo')
   };
 
   this.tryLogin = function(email, password) {
+    $rootScope.globalLoading = true;
     Auth.$login('password', {
       email: email,
       password: password
@@ -53,6 +54,7 @@ angular.module('icudo')
       toastr.success('Welcome back!');
     }, function(error) {
       $log.log(error);
+      $rootScope.globalLoading = false;
       toastr.error('Something doesn\'t look right, please check and try again');
     });
   };
