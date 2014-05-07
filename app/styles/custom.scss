@@ -22,12 +22,15 @@
   }
 }
 
+.icudo-button-huge {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+}
+
 .icudo-button-logo {
   background: url(/images/svg/icudo_symbol.svg);
   background-size: contain;
-  &.menu-open {
-    transform: rotate(90deg);
-  }
 }
 
 
@@ -127,6 +130,11 @@
 
 .crossed {
   text-decoration: line-through;
+}
+
+.spacer-y {
+  height: 10px;
+  min-height: 10px;
 }
 
 .centered {

@@ -40,8 +40,9 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
+* interface: header for the profile & change password pages
+* interface: header for the unauthorized pages (login, signup, landing (?))
 * bug: entering the app via a deep link to edit task id results in a redirect
-* bug: after logging out and clicking on a datepicker or tod everything brakes
 * integrate connection lost detector http://github.hubspot.com/offline/
 * redo mobile frienly with ng-Animate
 * create desktop UI (todo and done in one view?) 

@@ -1,3 +1,5 @@
+<div ng-include src="'/views/partials/headerUnauthorized.html'"></div>
+
 <div class="omb_login">
 
     <div class="spacer-y"></div>
@@ -6,7 +8,7 @@
             <form class="omb_loginForm" name="loginForm" ng-submit="signup()">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="username" placeholder="Your Name" ng-model="newUserName" required>
+                    <input type="text" class="form-control" name="username" placeholder="Your Name" ng-model="newUserName" required auto-focus>
                 </div>
                 <span class="help-block"></span>
 
