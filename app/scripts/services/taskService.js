@@ -132,7 +132,8 @@ angular.module('icudo')
     if(id && self.yesterdaysActiveTasks[id]) {
       delete self.yesterdaysActiveTasks[id];
     }
-    if(self.yesterdaysActiveTasks.length < 1) {
+
+    if(_.size(self.yesterdaysActiveTasks) < 1) {
       self.user.firstVisitToday = false;
     }
   };
