@@ -40,6 +40,7 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
+* feature: old date tasks => "copy to today" link
 * landing page text
 * choice of firebase endpoint based on the environment (host location): if icudo.com => icudo else
 * add/edit task to be able to change date
