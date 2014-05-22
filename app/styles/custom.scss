@@ -94,15 +94,15 @@
   border-radius: $buttonSize;
   &.important {
     border: none;
-    background-color: rgb(0,0,187);
+    background-color: $icudo-color-important;
   }
   &.cool {
     border: none;
-    background-color: rgb(0,128,0);
+    background-color: $icudo-color-cool;
   }
   &.urgent {
     border: none;
-    background-color: rgb(231,0,0);
+    background-color: $icudo-color-urgent;
   }
   &:hover {
     cursor: pointer;
@@ -126,7 +126,25 @@
   margin-right: 10px;
 }
 
+/* landing */
+.elevatorpitch {
+  text-align: justify;
+}
+
 /* general helpers */
+
+.icudo-important {
+  color: $icudo-color-important;
+}
+
+
+.icudo-cool {
+  color: $icudo-color-cool;
+}
+
+.icudo-urgent {
+  color: $icudo-color-urgent;
+}
 
 .crossed {
   text-decoration: line-through;
