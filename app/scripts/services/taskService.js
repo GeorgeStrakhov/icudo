@@ -11,6 +11,7 @@ angular.module('icudo')
   /* initialization */
   var self = this;
   this.user = UserService.user;
+  this.yesterdaysTasks = {};
   this.yesterdaysActiveTasks = {};
   this.tasks = getDayTasks(); 
 
@@ -80,13 +81,14 @@ angular.module('icudo')
     }
   };
 
+
   //toggle task attribute
   this.toggleTaskAttribute = function(id, attr) {
     var task = self.tasks.$child(id);
     task[attr] = !task[attr];
     task.$save().then(function(s){$log.log('task updated: '+id);}, function(e){$log.error(e);});
   };
-
+  
 
   //fetch new tasks for a given date; if no date is given - then for today
   this.changeDate = function(date) {
@@ -108,6 +110,7 @@ angular.module('icudo')
   this.getYesterdaysActiveTasks = function() {
     var deferred = $q.defer();
     var allYestTasks = getDayTasks(TimeService.getYesterday());
+    self.yesterdaysTasks = allYestTasks;
     var yestActiveTasks = {};
     allYestTasks.$on('loaded', function() {
       if(allYestTasks.$getIndex().length > 0) {
@@ -136,6 +139,21 @@ angular.module('icudo')
     if(_.size(self.yesterdaysActiveTasks) < 1) {
       self.user.firstVisitToday = false;
     }
+  };
+
+  //mark yesterdays task done (by id)
+  this.markYesterdaysTaskDone = function(yTaskId) {
+    //update the task
+    self.yesterdaysTasks.$child(yTaskId).$update({
+      status: 'done',
+      updatedAt: new Date().getTime()
+    }).then(function(s){
+      $log.log('task updated: '+yTaskId);
+      //then remove it from yesterdaysActiveTasks
+      self.removeYesterdaysTask(yTaskId);
+    }, function(e){
+      $log.error(e);
+    });
   };
 
   /* helper functions */

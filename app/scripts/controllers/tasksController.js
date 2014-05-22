@@ -54,6 +54,12 @@ angular.module('icudo')
     TaskService.removeYesterdaysTask(yTaskId);
   };
 
+  //mark yesterdays task done
+  $scope.markYesterdaysTaskDone = function(yTaskId) {
+    TaskService.markYesterdaysTaskDone(yTaskId);
+  };
+
+
   //forget yesterday i.e. stop the "unfinished from yesterday" dialouge from showing till tomorrow
   $scope.forgetYesterday = function() {
     UserService.user.firstVisitToday = false;
