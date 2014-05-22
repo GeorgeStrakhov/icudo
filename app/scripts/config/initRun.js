@@ -12,4 +12,9 @@ angular.module('icudo')
   //set loading state onto the rootScope it's the job of services and controllers to unset it when they are done bootstrapping
   $rootScope.globalLoading = true;
 
+  //logging state changes
+  $rootScope.$on('$stateChangeSuccess', function(){
+    $log.info('state changed to: '+arguments[1].name);
+  });
+
 }]);

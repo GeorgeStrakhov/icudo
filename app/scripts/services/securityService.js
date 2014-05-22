@@ -35,6 +35,7 @@ angular.module('icudo')
         message: rejectionReason,
         type: 'error'
       });
+      $log.error(rejectionReason);
     }
   });
 

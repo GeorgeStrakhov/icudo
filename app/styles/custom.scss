@@ -1,8 +1,15 @@
 @import 'customVariables';
 
+/* google fonts */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,cyrillic);
+
 /* angular-ui-bootstrap fix */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; };
 
+/* body */
+body {
+  font-family: $bodyFontFamily !important;
+}
 
 /* top menu bar */
 .icudo-navbar {
@@ -127,16 +134,25 @@
 }
 
 /* landing */
+.headline {
+  font-weight: 600;
+}
+.tagline {
+  font-size: 110%;
+}
 .elevatorpitch {
   text-align: justify;
 }
 
 /* general helpers */
 
+.icudo-underline {
+  border-bottom: 1px dotted #000;
+}
+
 .icudo-important {
   color: $icudo-color-important;
 }
-
 
 .icudo-cool {
   color: $icudo-color-cool;

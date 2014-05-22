@@ -40,16 +40,16 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
+* BUG: entering the app via a deep link to edit task id results in a redirect
 * header for add/edit with x instead of +
+* style global loader (loading partial view)
 * if no tasks for a day - show a button to add one
 * different view for desktop
-* feature: old date tasks => "copy to today" link
 * choice of firebase endpoint based on the environment (host location): if icudo.com => icudo else
 * add/edit task to be able to change date
-* BUG: entering the app via a deep link to edit task id results in a redirect
 * integrate connection lost detector http://github.hubspot.com/offline/
+* feature: old date tasks => "copy to today" link
 * ng-Animate menus for mobile
 * create desktop UI (todo and done in one view?)  => separate controllers to avoid conflicts?
 * BUG: what if I left the window open overnight? how / when should the date be changed? (!) recheck regularly?
-* style global loader (loading partial view)
 * integrate intercom for user-management & communication: http://docs.intercom.io/integrating-intercom-in-one-page-app
