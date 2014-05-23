@@ -19,3 +19,18 @@
     </tbody>
   </table>
 </div>
+
+<div class="row centered" ng-show="noTasksForToday">
+  <p>No tasks here...</p>
+  <div class="spacer-y"></div>
+  <p class="hide-desktop">
+  <a ng-href="#/{{today}}/add" class="btn btn-success">Add one now</a>
+  </p>
+</div>
+
+<div class="row show-desktop">
+  <hr />
+  <form role="form" ng-submit="saveTask('todo')"> 
+    <div ng-include src="'/views/partials/addEditTaskFormInnerThin.html'"></div>
+  </form>
+</div>

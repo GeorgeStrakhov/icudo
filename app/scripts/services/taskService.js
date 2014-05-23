@@ -44,6 +44,7 @@ angular.module('icudo')
 
   //add new task
   this.addNewTask = function(taskObj, params) {
+    params = (params) ? params : {};
     _.defaults(taskObj, self.defaultTaskObj);
     _.defaults(params, {
       redirectToAllTasks: false,

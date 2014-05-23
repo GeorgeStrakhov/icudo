@@ -14,7 +14,7 @@ angular.module('icudo')
 
   //logging state changes
   $rootScope.$on('$stateChangeSuccess', function(){
-    $log.info('state changed to: '+arguments[1].name);
+    $log.info('state changed to: ' + arguments[1].name);
   });
 
 }]);

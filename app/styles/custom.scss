@@ -11,6 +11,17 @@ body {
   font-family: $bodyFontFamily !important;
 }
 
+/* global loader */
+.globalLoader {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: url(/images/gif/loading.gif);
+}
+
 /* top menu bar */
 .icudo-navbar {
   width: 100%;
@@ -83,11 +94,19 @@ body {
   }
 }
 
+.tasksTableTop {
+  font-weight: bold;
+}
+
 .focusTasksRow {
   td {
     .taskName {
       font-weight: bold;
     }
+  }
+  td.taskActionsTd {
+    text-align: right;
+    width: 10%;
   }
 }
 
@@ -144,6 +163,21 @@ body {
   text-align: justify;
 }
 
+/* responsive helpers */
+.show-desktop {
+  display: none;
+  @media #{$bp-desktop} {
+    display: block;
+  }
+}
+
+.hide-desktop {
+  display: block;
+  @media #{$bp-desktop} {
+    display: none;
+  }
+}
+
 /* general helpers */
 
 .icudo-underline {
@@ -166,11 +200,6 @@ body {
   text-decoration: line-through;
 }
 
-.spacer-y {
-  height: 10px;
-  min-height: 10px;
-}
-
 .centered {
   text-align: center;
   float:none;
@@ -182,6 +211,7 @@ body {
 
 /* custom reusable classes */
 .spacer-y {
+  min-height: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
 }

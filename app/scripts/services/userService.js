@@ -5,7 +5,7 @@
  */
 
 angular.module('icudo')
-.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'StatsService', 'TimeService', 'dataConfig', '$rootScope', '$location', '$state', 'toastr', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, StatsService, TimeService, dataConfig, $rootScope, $location, $state, toastr) {
+.service('UserService', ['$q', '$log', '$firebase', 'AuthFactory', 'ProfileCreatorFactory', 'StatsService', 'TimeService', 'dataConfig', '$rootScope', '$location', '$state', 'toastr', '$timeout', function($q, $log, $firebase, AuthFactory, ProfileCreatorFactory, StatsService, TimeService, dataConfig, $rootScope, $location, $state, toastr, $timeout) {
 
   var Auth = AuthFactory;
   var self = this;
@@ -61,11 +61,13 @@ angular.module('icudo')
 
   this.logout = function() {
     $log.log('logout!');
-    $location.path('/');
     Auth.$logout();
     self.user = undefined;
-    $rootScope.globalLoading = false;
-    toastr.success('Farewell!');
+    $timeout(function(){
+      $state.go('home');
+      $rootScope.globalLoading = false;
+      toastr.success('Farewell!');
+    }, 100);
   };
 
   this.recoverPassword = function(email) {

@@ -4,9 +4,14 @@ angular.module('icudo')
 .controller('TasksController', ['$scope', 'TaskService', 'TimeService', 'UserService', '$location', '$log',  function($scope, TaskService, TimeService, UserService, $location, $log) {
 
   //initial data & binding on update the event is emitted from the taskService
+  $scope.task = {};
   $scope.tasks = TaskService.allTasks;
   $scope.$on('tasksUpdated', function(){
     $scope.tasks = TaskService.allTasks;
+    $scope.noTasksForToday = false;
+    if($scope.tasks && $scope.tasks.focus) {
+      $scope.noTasksForToday = ($scope.tasks.focus.length == 0);
+    }
   });
 
   //load yesterday's tasks that are still in todo
@@ -18,10 +23,12 @@ angular.module('icudo')
   $scope.user = UserService.user;
 
   //add task
-  $scope.addTask = function() {
-    TaskService.addNewTask($scope.newTask);
-    //clean up the input
-    $scope.newTask = {};
+  $scope.saveTask = function(status) {
+    $scope.task.status = (status == 'done') ? 'done' : 'todo';
+    TaskService.addNewTask($scope.task);
+    //clean input field and checkboxes
+    $scope.task = {};
+    $('#taskInput').focus();
   };
 
   //go to editing task

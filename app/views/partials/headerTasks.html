@@ -2,7 +2,8 @@
   <table class="icudo-navbar icudo-navbar-mobile">
     <tr>
       <td>
-        <a ng-href="#/menu/" class="icudo-menu-button icudo-button-logo pull-left"></a>
+        <a ng-href="#/menu/" class="icudo-menu-button icudo-button-logo pull-left hide-desktop"></a>
+        <a ng-href="#/" class="show-desktop">FOCUS</a>
       </td>
       <td class="datepicker-td">
         <div class="centered" ng-controller="DatePickerController">
@@ -17,8 +18,10 @@
         </div>
       </td>
       <td>
-        <a ng-href="#/{{today}}/add" class="icudo-menu-button icudo-button-plus pull-right"></a>
+        <a ng-href="#/{{today}}/add" class="icudo-menu-button icudo-button-plus pull-right hide-desktop"></a>
+        <a ng-href="#/profile" class="show-desktop pull-right">PROFILE</a> 
       </td>
     </tr>
   </table>
 </div>
+<div class="spacer-y show-dektop"></div>

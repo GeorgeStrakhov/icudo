@@ -1,23 +1,6 @@
 <div>
   <form role="form" ng-submit="saveTask('todo')"> 
-    <div class="form-group">
-      <input type="text" class="form-control" id="taskInput" placeholder="Enter task" ng-model="task.name" required auto-focus>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="task.important"> important
-      </label>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="task.cool"> cool
-      </label>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="task.urgent"> urgent
-      </label>
-    </div>
+    <div ng-include src="'/views/partials/addEditTaskFormInner.html'"></div>
     <button type="submit" class="btn btn-success">save to todo</button>
     &nbsp; or <a href ng-click="saveTask('done')">save to done</a>
   </form>
