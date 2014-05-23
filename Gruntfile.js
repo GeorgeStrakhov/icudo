@@ -257,7 +257,8 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
-            'fonts/**/*'
+            'fonts/**/*',
+            'scripts/**/*'
           ]
         }, {
           expand: true,
@@ -308,7 +309,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'bower-install',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

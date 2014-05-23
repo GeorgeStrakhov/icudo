@@ -40,6 +40,7 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
+* BUG: reconfigure grunt to deploy properly with minification and all that. currently 25 files which is BAAD
 * BUG: entering the app via a deep link to edit task id results in a redirect
 * choice of firebase endpoint based on the environment (host location): if icudo.com => icudo else
 * add/edit task to be able to change date
