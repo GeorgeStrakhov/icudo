@@ -244,6 +244,11 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      concatScripts: {
+        files: [
+          {expand: true, flatten: true, src: ['.tmp/concat/scripts/*'], dest: '<%= yeoman.dist %>/scripts/', filter: 'isFile'},
+        ]
+      },
       dist: {
         files: [{
           expand: true,
@@ -259,7 +264,6 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
             'fonts/**/*',
-            'scripts/**/*'
           ]
         }, {
           expand: true,
@@ -313,12 +317,11 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'concat',
+    'concat', 
     'ngmin',
     'copy:dist',
-    'cdnify',
+    'copy:concatScripts',
     'cssmin',
-    'uglify',
     'rev',
     'usemin',
     'htmlmin'
