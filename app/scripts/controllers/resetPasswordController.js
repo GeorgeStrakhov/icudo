@@ -3,29 +3,31 @@
 /* reset password - auth by email and toke in the secret url */
 
 angular.module('icudo')
-.controller('ResetPasswordController', ['$scope', '$rootScope', 'AuthFactory', 'UserService', '$log', '$location', '$routeParams', 'toastr', function($scope, $rootScope, Auth, UserService, $log, $location, $routeParams, toastr) {
+.controller('ResetPasswordController', ['$scope', '$rootScope', 'AuthFactory', 'UserService', '$log', '$location', '$stateParams', 'toastr', function($scope, $rootScope, Auth, UserService, $log, $location, $stateParams, toastr) {
 
   //initialization
   $scope.auth = Auth;
 
-  if($routeParams.email && $routeParams.token) {
+  $log.info($stateParams);
 
-    $scope.oldUserPassword = $scope.oldPassword = $routeParams.token;
+  if($stateParams.email && $stateParams.token) {
+
+    $scope.oldUserPassword = $scope.oldPassword = $stateParams.token;
     $scope.auth.$login('password', {
-      email: $routeParams.email,
-      password: $routeParams.token
+      email: $stateParams.email,
+      password: $stateParams.token
     }).then(function(user) {
       $rootScope.globalLoading = false;
       $scope.user = user;
       toastr.info('Please set your new password');
     }, function(rejectReason) {
+      $log.error(rejectReason);
       $location.path('/');
       $location.url($location.path());
       toastr.error('Something doesn\'t look right, please try again');
     });
   } else {
-
-    $loaction.path('/');
+    $location.path('/');
   }
 
   //change password
@@ -37,7 +39,6 @@ angular.module('icudo')
       toastr.success('New password set!');
       $scope.oldUserPassword = false;
       UserService.tryLogin($scope.auth.user.email, $scope.newPassword);
-      $log.log('D');
     },function(error){
       toastr.error('Oops, something doesn\'t look right. Check your old password and try again.');
     });

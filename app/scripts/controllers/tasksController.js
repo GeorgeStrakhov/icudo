@@ -3,15 +3,12 @@
 angular.module('icudo')
 .controller('TasksController', ['$scope', 'TaskService', 'TimeService', 'UserService', '$location', '$log',  function($scope, TaskService, TimeService, UserService, $location, $log) {
 
-  //initial data & binding on update the event is emitted from the taskService
+  //initial data & binding on update; update event event is emitted from the taskService
   $scope.task = {};
   $scope.tasks = TaskService.allTasks;
+  $scope.noTasksForToday = TaskService.allTasks.noTasksForToday;
   $scope.$on('tasksUpdated', function(){
-    $scope.tasks = TaskService.allTasks;
-    $scope.noTasksForToday = false;
-    if($scope.tasks && $scope.tasks.focus) {
-      $scope.noTasksForToday = ($scope.tasks.focus.length == 0);
-    }
+    $scope.noTasksForToday = TaskService.allTasks.noTasksForToday;
   });
 
   //load yesterday's tasks that are still in todo

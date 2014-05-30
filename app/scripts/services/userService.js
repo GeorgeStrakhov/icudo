@@ -77,6 +77,8 @@ angular.module('icudo')
   };
 
   this.signup = function(newUser) {
+    $log.info('signup');
+    $rootScope.globalLoading = true;
     //this is an ugly callback hell nightmare. ToDo: refactor
     Auth.$createUser(newUser.email, 'tempPass2014', true).then(function(newUserObj) {
       //login he newly created user first
@@ -93,15 +95,19 @@ angular.module('icudo')
             Auth.$logout();
             $location.path('/');
             toastr.success('Thank you! We\'ve sent an email with further instructions your way.');
+            $rootScope.globalLoading = false;
           }, function(err){
-            $log.log(err);
+            $log.error(err);
+            $rootScope.globalLoading = false;
             toastr.error('Sorry, there was an error.');
           });
         });
       });
     },
       function(reason){
+        $log.error(reason);
         toastr.error(reason.code);
+        $rootScope.globalLoading = false;
       });
   };
 

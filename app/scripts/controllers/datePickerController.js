@@ -9,6 +9,7 @@ angular.module('icudo')
 
     $scope.$watch('dt', function(e) {
       var date = TimeService.formatDate($scope.dt);
+      if(date == $scope.today) return; //fix to prevent unnecessary jumping around
       $state.go('date.todo', {date: date}); 
       $scope.$emit('changeDate', date);
     });

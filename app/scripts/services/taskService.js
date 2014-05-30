@@ -218,6 +218,7 @@ angular.module('icudo')
       self.allTasks.focus = filteredTasks.focus;
       self.allTasks.todo = filteredTasks.todo;
       self.allTasks.done = filteredTasks.done;
+      self.allTasks.noTasksForToday = (_.size(filteredTasks.focus) == 0);
       $rootScope.$broadcast('tasksUpdated');
     }
     justFiltered = true;
