@@ -62,6 +62,7 @@ angular.module('icudo').config([
       controller: function ($state, $stateParams, $rootScope, $scope) {
         //assigning rootScope.today and making sure people are not stuck at /yyyy-mm-dd and are redirected to /yyyy-mm-dd/todo
         $rootScope.today = $stateParams.date;
+        $scope.$emit('changeDate', $stateParams.date);
         if ($state.current.name == 'date') {
           $state.go('date.todo', $stateParams);
         }
@@ -642,14 +643,17 @@ angular.module('icudo').service('TimeService', [
 'use strict';
 angular.module('icudo').controller('AppController', [
   '$scope',
+  'TimeService',
   'AuthFactory',
   'UserService',
   '$window',
   '$log',
-  function ($scope, Auth, UserService, $window, $log) {
+  function ($scope, TimeService, Auth, UserService, $window, $log) {
     //get current user
     $scope.user = UserService.user;
     $scope.auth = Auth;
+    //set current date
+    $scope.currentDate = TimeService.getToday();
     //go back
     $scope.goBack = function () {
       $window.history.back();
@@ -766,10 +770,8 @@ angular.module('icudo').controller('TasksController', [
     //initial data & binding on update; update event event is emitted from the taskService
     $scope.task = {};
     $scope.tasks = TaskService.allTasks;
-    $scope.noTasksForToday = TaskService.allTasks.noTasksForToday;
-    $scope.$on('tasksUpdated', function () {
-      $scope.noTasksForToday = TaskService.allTasks.noTasksForToday;
-    });
+    //logging info
+    $log.info('$scope.today: ' + $scope.today);
     //load yesterday's tasks that are still in todo
     TaskService.getYesterdaysActiveTasks().then(function (d) {
       $scope.yesterdaysActiveTasks = d;
