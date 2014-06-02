@@ -56,6 +56,7 @@ angular.module('icudo')
     templateUrl: '/views/date.html',
     controller: function($state, $stateParams, $rootScope, $scope) { //assigning rootScope.today and making sure people are not stuck at /yyyy-mm-dd and are redirected to /yyyy-mm-dd/todo
       $rootScope.today = $stateParams.date;
+      $scope.$emit('changeDate', $stateParams.date);
       if($state.current.name == 'date') {
         $state.go('date.todo', $stateParams);
       }

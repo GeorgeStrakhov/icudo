@@ -40,8 +40,6 @@ ICUDO is a todo-done list with prioritization and other opinionated smarts built
 
 
 ##Todo
-* BUG: FA-icons not shown (???)
-* BUG: sometimes shows no tasks after flickering date back and forth (can't reproduce on dev??)
 * add/edit task to be able to change date
 * integrate connection lost detector http://github.hubspot.com/offline/
 * feature: old date tasks => "copy to today" link
