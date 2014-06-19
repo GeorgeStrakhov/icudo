@@ -34,7 +34,9 @@
     <toaster-container></toaster-container>
 
     <!-- Custom content from templates -->
-    <div class="container" ui-view ng-hide="globalLoading"></div>
+    <div class="container" ui-view ng-hide="globalLoading">
+      <div class="globalLoader centered"></div>
+    </div>
     <!-- Global loading indicator -->
     <div ng-include src="'/views/partials/loading.html'"></div>
     <!-- global footer -->
