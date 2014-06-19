@@ -53,7 +53,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
+        // Change to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
         livereload: 35729
       },
@@ -120,7 +120,6 @@ module.exports = function (grunt) {
         ignorePath: '<%= yeoman.app %>/'
       }
     },
-
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -205,6 +204,19 @@ module.exports = function (grunt) {
         }]
       }
     },
+
+    //html templates preloading in dist
+    ngtemplates: {
+      icudo: {
+        cwd: '<%= yeoman.app %>',
+        src: 'views/{,*/}*.html',
+        dest: '<%= yeoman.app %>/views/cachedTemplates.js',
+        options: {
+          prefix: '/'
+        }
+      }
+    },
+    //html min
     htmlmin: {
       dist: {
         options: {
@@ -296,7 +308,13 @@ module.exports = function (grunt) {
     }
   });
 
+  //custom task to delete unneeded files after building
+  grunt.registerTask('cleanUp', function() {
+    grunt.file.delete('app/views/cachedTemplates.js');
+    grunt.log.writeln('cleaned up!')
+  });
 
+  //serve task
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -314,6 +332,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngtemplates',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -324,7 +343,8 @@ module.exports = function (grunt) {
     'cssmin',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'cleanUp'
   ]);
 
 };
